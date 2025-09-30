@@ -3,12 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>TechSolutions Mock Calls Chatbot • New Hires</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href='/css/style.css' rel='stylesheet'>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <main>
+    <div id="alert"></div>
+    <div class="login-container">
+      <div class="login">
+        <h1 class="logo"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></div>TechSolutions<br />Mock Calls Chatbot</h1>
+        <form id="login" action="/pre-chat-info.html">
+          <input type="text" name="ldap" autocomplete="off" placeholder="User ldap" />
+          <input type="text" name="wave" autocomplete="off" placeholder="Wave Number" />
+          <input type="text" name="mockid" autocomplete="off" placeholder="Mock ID" />
+          <input type="submit" value="Entrar" autocomplete="off" />
+        </form>
+        <p>SAO Technical Solutions Development Team</p>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
 </body>
 </html>

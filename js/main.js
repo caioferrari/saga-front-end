@@ -24,24 +24,18 @@ if(window.location.pathname == "/" || window.location.pathname == "/index.html")
   let errorsFlag;
   document.querySelector("#login").addEventListener("submit", function(e) {
     let ldap = document.querySelector("[name='ldap']");
-    let wave = document.querySelector("[name='wave']");
-    let mock = document.querySelector("[name='mockid']");
+    let password = document.querySelector("[name='password']");
     let errorsFlag = false;
 
     if(ldap.value == "" && errorsFlag == false) {
       e.preventDefault();
       errorsFlag = true;
-      alertBox("⚠️", "", "Insira seu ldap");
+      alertBox("⚠️", "", "Add your ldap");
     }
-    if(wave.value == "" && errorsFlag == false) {
+    if(password.value == "" && errorsFlag == false) {
       e.preventDefault();
       errorsFlag = true;
-      alertBox("⚠️", "", "Insira a sua wave de treinamento");
-    }
-    if(mock.value == "" && errorsFlag == false) {
-      e.preventDefault();
-      errorsFlag = true;
-      alertBox("⚠️", "", "Insira o ID da sua mock");
+      alertBox("⚠️", "", "Add your password");
     }
   });
   document.addEventListener("click", function(e) {

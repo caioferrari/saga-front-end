@@ -67,25 +67,153 @@
           <h6>Log out</h6>
         </div>
       </div>
-      <div class="right-nav" style="padding: 30px;">
-        <div class="saga-quick-input">
-          <form action="#">
-            <input type="text" name="search" placeholder="Saga Quick Consult" />
-          </form>
-        </div>
-        <div class="cards">
-          <div class="overhead-queue">
-            <h1>Profile</h1>
+      <div class="right-nav">
+        <div class="dashboard-container">
+          <div class="saga-quick-input">
+            <form action="#">
+              <input type="text" name="search" placeholder="Saga Quick Consult" />
+            </form>
           </div>
-          <div class="queue-status">
-            <h1>Status</h1>
-            The floor is
-            <div></div>
+
+          <div class="dashboard-grid">
+            <div class="dashboard-card profile-card">
+              <div class="card-header">
+                <h3>Profile</h3>
+                <div class="status-badge" id="userStatus">Online</div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">John Smith</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">jsmith</p>
+                </div>
+              </div>
+              <div class="profile-stats">
+                <div class="stat-item">
+                  <span class="stat-value" id="callsCompleted">0</span>
+                  <span class="stat-label">Mock Calls</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value" id="avgScore">0</span>
+                  <span class="stat-label">Avg Score</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card quick-actions-card">
+              <div class="card-header">
+                <h3>Quick Actions</h3>
+              </div>
+              <div class="quick-actions">
+                <a href="/chat.html" class="action-btn primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  Start Mock Call
+                </a>
+                <button class="action-btn secondary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                  Browse Library
+                </button>
+                <button class="action-btn secondary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  View Resources
+                </button>
+              </div>
+            </div>
+
+            <div class="dashboard-card team-status-card">
+              <div class="card-header">
+                <h3>Team Status</h3>
+                <span class="team-count" id="teamCount">0 online</span>
+              </div>
+              <div class="team-members" id="teamMembers">
+                <div class="loading">Loading team status...</div>
+              </div>
+            </div>
+
+            <div class="dashboard-card library-stats-card">
+              <div class="card-header">
+                <h3>Knowledge Base</h3>
+              </div>
+              <div class="library-stats">
+                <div class="stat-large">
+                  <span class="stat-number" id="totalContent">0</span>
+                  <span class="stat-text">Total Articles</span>
+                </div>
+                <div class="category-breakdown" id="categoryBreakdown">
+                  <div class="category-item">
+                    <span class="category-name">Technical</span>
+                    <span class="category-count" id="technicalCount">0</span>
+                  </div>
+                  <div class="category-item">
+                    <span class="category-name">Process</span>
+                    <span class="category-count" id="processCount">0</span>
+                  </div>
+                  <div class="category-item">
+                    <span class="category-name">Troubleshooting</span>
+                    <span class="category-count" id="troubleshootingCount">0</span>
+                  </div>
+                  <div class="category-item">
+                    <span class="category-name">Product</span>
+                    <span class="category-count" id="productCount">0</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card performance-card">
+              <div class="card-header">
+                <h3>Your Performance</h3>
+              </div>
+              <div class="performance-chart">
+                <div class="performance-item">
+                  <div class="performance-label">
+                    <span>Completed Calls</span>
+                    <span class="performance-value" id="perfCallsCompleted">0</span>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="perfCallsBar" style="width: 0%"></div>
+                  </div>
+                </div>
+                <div class="performance-item">
+                  <div class="performance-label">
+                    <span>Average Duration</span>
+                    <span class="performance-value" id="perfAvgDuration">0m</span>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="perfDurationBar" style="width: 0%"></div>
+                  </div>
+                </div>
+                <div class="performance-item">
+                  <div class="performance-label">
+                    <span>Success Rate</span>
+                    <span class="performance-value" id="perfSuccessRate">0%</span>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="perfSuccessBar" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card activity-card">
+              <div class="card-header">
+                <h3>Recent Activity</h3>
+              </div>
+              <div class="activity-feed" id="activityFeed">
+                <div class="loading">Loading activity...</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>

@@ -63,12 +63,12 @@ if(window.location.href.includes("chat.html")) {
 
   /*CHAT LAYOUT*/
   const chatbox = document.querySelector('.chatbox');
-  chatbox.innerHTML = `
+  /*chatbox.innerHTML = `
     <div class="ringing-container">
       <div class="phone"></div>
       <div class="phone-alo-text">Chamando...</div>
     </div>
-  `;
+  `;*/
 
   //Scroll
   chatbox.scrollTop = chatbox.scrollHeight;
@@ -114,11 +114,11 @@ if(window.location.href.includes("chat.html")) {
       </div>
     `
   }
-  let pulsingWaitingTime = (Math.floor(Math.random() * 21) + 10) * 1000;
+  //let pulsingWaitingTime = (Math.floor(Math.random() * 21) + 10) * 1000;
   const sagaIsTyping = setTimeout(() => {
     chatbox.innerHTML = typing;
     setTimeout(() => {
-      saga("Alô?");
+      saga("How can I help you?");
       textarea.disabled = false;
       micButton.disabled = false;
       sendButton.disabled = false;
@@ -127,8 +127,8 @@ if(window.location.href.includes("chat.html")) {
       document.querySelector("div.input-nav").style.removeProperty("cursor");
       textarea.style.removeProperty("cursor");
       sendButton.style.removeProperty("cursor");
-    }, 4000)
-  }, pulsingWaitingTime);
+    }, 2000)
+  }, 2000);
 
   /*STOPWATCHING*/
   const stopwatching = () => {

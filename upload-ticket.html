@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Ticket - TechSolutions Webao Help 3.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href='/css/style.css' rel='stylesheet'>
+  <style>
+    .upload-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 24px;
+      height: 100vh;
+    }
+
+    .upload-sidebar {
+      background: var(--background-secondary);
+      padding: 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .upload-content {
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .upload-header {
+      margin-bottom: 32px;
+    }
+
+    .upload-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .upload-header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 600px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+      background: var(--background-primary);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-group label {
+      margin: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: var(--background-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--background-secondary);
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .alert-success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .alert-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      gap: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      .upload-container {
+        grid-template-columns: 1fr;
+      }
+
+      .upload-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .upload-content {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .upload-content {
+        padding: 16px;
+      }
+
+      .upload-header h1 {
+        font-size: 24px;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="upload-container">
+      <div class="upload-sidebar">
+        <div class="header">
+          <h1 class="logo"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></div>TechSolutions Webao Help 3.0</h1>
+        </div>
+        <div class="tips-nav" style="margin-top: 32px;">
+          <div class="tips-list">
+            <a href="/main.html" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+              <div class="tip">
+                <h6>Main</h6>
+                <p>Today's dashboard</p>
+              </div>
+            </a>
+            <a href="/chat.html" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+              <div class="tip">
+                <h6>Ask Saga</h6>
+                <p>Quick answers about processes.</p>
+              </div>
+            </a>
+            <a href="#" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></div>
+              <div class="tip">
+                <h6>Queue</h6>
+                <p>Team tickets and queue status.</p>
+              </div>
+            </a>
+            <a href="/upload-ticket.html" class="tip-card" style="background: var(--background-tertiary);">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg></div>
+              <div class="tip">
+                <h6>Upload Ticket</h6>
+                <p>Create a new support ticket.</p>
+              </div>
+            </a>
+            <a href="#" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="3"></circle><path d="M12 10v6"></path><path d="M9 13h6"></path></svg></div>
+              <div class="tip">
+                <h6>Browse tickets</h6>
+                <p>Check tickets and view details.</p>
+              </div>
+            </a>
+            <a href="#" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+              <div class="tip">
+                <h6>System Analytics</h6>
+                <p>For overhead overviews and workflow.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="upload-content">
+        <a href="/main.html" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to Dashboard
+        </a>
+
+        <div class="upload-header">
+          <h1>Upload New Ticket</h1>
+          <p>Create and submit a new support ticket for immediate processing</p>
+        </div>
+
+        <div id="alertContainer"></div>
+
+        <form class="upload-form" id="ticketForm">
+          <div class="form-group">
+            <label for="caseId">Case ID *</label>
+            <input type="text" id="caseId" name="caseId" placeholder="Enter case ID" required />
+          </div>
+
+          <div class="form-group">
+            <label for="caseType">Case Type *</label>
+            <select id="caseType" name="caseType" required>
+              <option value="">Select a case type</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Tagging">Tagging</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="priority">Priority *</label>
+            <select id="priority" name="priority" required>
+              <option value="">Select a priority level</option>
+              <option value="Gold">Gold</option>
+              <option value="Silver">Silver</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="team">Team *</label>
+            <select id="team" name="team" required>
+              <option value="">Select a team</option>
+              <option value="SME">SME</option>
+              <option value="QA">QA</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input type="checkbox" id="onCall" name="onCall" />
+              <label for="onCall">On Call</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="problemDescription">Problem Description *</label>
+            <textarea id="problemDescription" name="problemDescription" placeholder="Describe the problem in detail..." required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit Ticket</button>
+            <button type="reset" class="btn btn-secondary">Clear Form</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/upload-ticket.js"></script>
+</body>
+</html>

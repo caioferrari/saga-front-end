@@ -45,6 +45,31 @@ if(window.location.pathname == "/" || window.location.pathname == "/index.html")
   });
 }
 
+/*FORMS*/
+if(window.location.pathname == "/ticket-upload.html") {
+  let errorsFlag;
+  document.querySelector("#ticketForm").addEventListener("submit", function(e) {
+    let fields = document.querySelectorAll("[aria-required='true']");
+    let errorsFlag = false;
+
+    fields.forEach((field) => {
+      if(field.value == "" && errorsFlag == false) {
+        e.preventDefault();
+        errorsFlag = true;
+        alertBox("⚠️", "", field.getAttribute("aria-errormessage"));
+      }
+    });
+  });
+  document.addEventListener("click", function(e) {
+    if(e.target.title == "OK") {
+      e.preventDefault();
+      errorsFlag = false;
+      document.querySelector(".success").innerHTML = "Thank you! Your ticket has been submitted."
+      // alertBox(`<img src="../images/loading.gif" alt="Loading" style='width: 20px; height: 20px' />`, "", "");
+    }
+  });
+}
+
 if(window.location.href.includes("chat.html")) {
   /*FORM LOCK*/
   document.querySelector("form.chat-form").addEventListener("submit", function(e) {
@@ -131,6 +156,8 @@ if(window.location.href.includes("chat.html")) {
   }, 2000);
 
   /*STOPWATCHING*/
+  /*
+  DEPRECATED
   const stopwatching = () => {
     let startTime= 0;
     let elapsedTime = 0;
@@ -171,8 +198,11 @@ if(window.location.href.includes("chat.html")) {
     }
   }
   stopwatching()
+*/
 
   /*PROGRESS BAR*/
+  /*
+  DEPRECATED
   const progressBar = () => {
     const progressText = document.querySelector("#progress");
     const progressValue = document.querySelector("#progressBar");
@@ -193,6 +223,7 @@ if(window.location.href.includes("chat.html")) {
     }, 50);
   };
   progressBar();
+  */
 
   /*START RECORDING COUNTDOWN*/
   let startCountdown = 3;
@@ -376,4 +407,15 @@ if(window.location.href.includes("chat.html")) {
       isRecording = false;
     }
   }
+}
+
+//Avatar
+const avatar = () => {
+  const userAvatar = document.querySelector("#userAvatar");
+  const userName = document.querySelector("#userName");
+  const initials = userName.innerText.split(" ")[0][0] + userName.innerText.split(" ").pop()[0];
+  userAvatar.innerHTML = initials.toUpperCase();
+}
+if(window.location.pathname == "/main.html") {
+  avatar();
 }

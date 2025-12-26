@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Base Manager - Saga AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href='/css/style.css' rel='stylesheet'>
+  <style>
+    .kb-admin-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 30px;
+    }
+    .kb-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .kb-header h1 {
+      color: #2A7B9B;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .kb-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #E5E7EB;
+    }
+    .kb-tab {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #6B7280;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .kb-tab.active {
+      color: #2A7B9B;
+      border-bottom: 3px solid #2A7B9B;
+    }
+    .kb-tab:hover {
+      color: #2A7B9B;
+    }
+    .kb-content {
+      display: none;
+    }
+    .kb-content.active {
+      display: block;
+    }
+    .kb-form {
+      background: #FFF;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1F2937;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 8px;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 14px;
+    }
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    .form-group small {
+      display: block;
+      margin-top: 5px;
+      color: #6B7280;
+      font-size: 12px;
+    }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(45deg, #2A7B9B 0%, #57C785 100%);
+      color: #FFF;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(42, 123, 155, 0.3);
+    }
+    .kb-list {
+      background: #FFF;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .kb-item {
+      padding: 20px;
+      border-bottom: 1px solid #E5E7EB;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+    }
+    .kb-item:last-child {
+      border-bottom: none;
+    }
+    .kb-item-content h3 {
+      color: #1F2937;
+      margin-bottom: 8px;
+    }
+    .kb-item-content p {
+      color: #6B7280;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .kb-item-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .kb-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-category {
+      background: #EFF6FF;
+      color: #2563EB;
+    }
+    .badge-tag {
+      background: #F3F4F6;
+      color: #4B5563;
+    }
+    .kb-item-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    .btn-danger {
+      background: #EF4444;
+      color: #FFF;
+    }
+    .btn-secondary {
+      background: #6B7280;
+      color: #FFF;
+    }
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #D1D5DB;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .message {
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .message.show {
+      display: block;
+    }
+    .message.success {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    .message.error {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+  </style>
+</head>
+<body>
+  <div id="alert"></div>
+  <div class="kb-admin-container">
+    <div class="kb-header">
+      <h1>Knowledge Base Manager</h1>
+      <p>Manage Saga AI's knowledge base content</p>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div class="kb-tabs">
+      <button class="kb-tab active" data-tab="add">Add New Article</button>
+      <button class="kb-tab" data-tab="list">View All Articles</button>
+      <button class="kb-tab" data-tab="bulk">Bulk Import</button>
+    </div>
+
+    <div class="kb-content active" id="add-content">
+      <div class="kb-form">
+        <h2>Add New Article</h2>
+        <form id="addArticleForm">
+          <div class="form-group">
+            <label for="title">Title *</label>
+            <input type="text" id="title" required placeholder="e.g., Installing Google Tag Manager in Prestashop">
+            <small>A clear, descriptive title for the article</small>
+          </div>
+
+          <div class="form-group">
+            <label for="question">Question *</label>
+            <input type="text" id="question" required placeholder="e.g., How can I install Google Tag Manager in Prestashop CMS?">
+            <small>The main question users will ask</small>
+          </div>
+
+          <div class="form-group">
+            <label for="answer">Answer *</label>
+            <textarea id="answer" required placeholder="Provide detailed step-by-step instructions..."></textarea>
+            <small>Detailed answer with steps, code examples, and tips</small>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category *</label>
+            <select id="category" required>
+              <option value="Technical">Technical</option>
+              <option value="Process">Process</option>
+              <option value="Troubleshooting">Troubleshooting</option>
+              <option value="Product">Product</option>
+              <option value="General">General</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" placeholder="tag1, tag2, tag3">
+            <small>Comma-separated tags for better searchability</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Add Article</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="kb-content" id="list-content">
+      <div class="kb-list">
+        <h2>All Articles</h2>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search articles...">
+        </div>
+        <div id="articlesList">
+          <p>Loading articles...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="kb-content" id="bulk-content">
+      <div class="kb-form">
+        <h2>Bulk Import Articles</h2>
+        <p style="margin-bottom: 20px;">Import multiple articles at once using JSON format.</p>
+        <div class="form-group">
+          <label for="bulkData">JSON Data *</label>
+          <textarea id="bulkData" placeholder='[
+  {
+    "title": "Article Title",
+    "question": "The question?",
+    "answer": "The answer",
+    "category": "Technical",
+    "tags": ["tag1", "tag2"]
+  }
+]' style="min-height: 300px;"></textarea>
+          <small>Paste JSON array of articles</small>
+        </div>
+        <button id="bulkImportBtn" class="btn btn-primary">Import Articles</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/knowledge-base-manager.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    if (!supabaseClient) {
+      alert('Please configure Supabase credentials in js/supabase-config.js');
+    }
+
+    const kbManager = new KnowledgeBaseManager(supabaseClient);
+
+    const tabs = document.querySelectorAll('.kb-tab');
+    const contents = document.querySelectorAll('.kb-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabName = tab.dataset.tab;
+
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        document.getElementById(`${tabName}-content`).classList.add('active');
+
+        if (tabName === 'list') {
+          loadArticles();
+        }
+      });
+    });
+
+    function showMessage(text, type = 'success') {
+      const message = document.getElementById('message');
+      message.textContent = text;
+      message.className = `message ${type} show`;
+      setTimeout(() => {
+        message.classList.remove('show');
+      }, 5000);
+    }
+
+    document.getElementById('addArticleForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const question = document.getElementById('question').value;
+      const answer = document.getElementById('answer').value;
+      const category = document.getElementById('category').value;
+      const tagsInput = document.getElementById('tags').value;
+      const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()) : [];
+
+      try {
+        await kbManager.addArticle({
+          title,
+          question,
+          answer,
+          category,
+          tags
+        });
+
+        showMessage('Article added successfully!', 'success');
+        document.getElementById('addArticleForm').reset();
+      } catch (error) {
+        showMessage('Error adding article: ' + error.message, 'error');
+      }
+    });
+
+    async function loadArticles() {
+      const articlesList = document.getElementById('articlesList');
+      articlesList.innerHTML = '<p>Loading articles...</p>';
+
+      try {
+        const articles = await kbManager.getAllArticles();
+
+        if (articles.length === 0) {
+          articlesList.innerHTML = '<p>No articles found.</p>';
+          return;
+        }
+
+        articlesList.innerHTML = articles.map(article => `
+          <div class="kb-item">
+            <div class="kb-item-content">
+              <h3>${article.title}</h3>
+              <p><strong>Q:</strong> ${article.question}</p>
+              <p>${article.answer.substring(0, 150)}...</p>
+              <div class="kb-item-meta">
+                <span class="kb-badge badge-category">${article.category}</span>
+                ${article.tags.map(tag => `<span class="kb-badge badge-tag">${tag}</span>`).join('')}
+              </div>
+            </div>
+            <div class="kb-item-actions">
+              <button class="btn btn-small btn-danger" onclick="deleteArticle('${article.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        articlesList.innerHTML = '<p>Error loading articles: ' + error.message + '</p>';
+      }
+    }
+
+    async function deleteArticle(id) {
+      if (!confirm('Are you sure you want to delete this article?')) {
+        return;
+      }
+
+      try {
+        await kbManager.deleteArticle(id);
+        showMessage('Article deleted successfully!', 'success');
+        loadArticles();
+      } catch (error) {
+        showMessage('Error deleting article: ' + error.message, 'error');
+      }
+    }
+
+    document.getElementById('searchInput').addEventListener('input', async (e) => {
+      const searchTerm = e.target.value.trim();
+
+      if (searchTerm === '') {
+        loadArticles();
+        return;
+      }
+
+      const articlesList = document.getElementById('articlesList');
+
+      try {
+        const articles = await kbManager.searchArticles(searchTerm);
+
+        if (articles.length === 0) {
+          articlesList.innerHTML = '<p>No articles found.</p>';
+          return;
+        }
+
+        articlesList.innerHTML = articles.map(article => `
+          <div class="kb-item">
+            <div class="kb-item-content">
+              <h3>${article.title}</h3>
+              <p><strong>Q:</strong> ${article.question}</p>
+              <p>${article.answer.substring(0, 150)}...</p>
+              <div class="kb-item-meta">
+                <span class="kb-badge badge-category">${article.category}</span>
+                ${article.tags.map(tag => `<span class="kb-badge badge-tag">${tag}</span>`).join('')}
+              </div>
+            </div>
+            <div class="kb-item-actions">
+              <button class="btn btn-small btn-danger" onclick="deleteArticle('${article.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        articlesList.innerHTML = '<p>Error searching articles: ' + error.message + '</p>';
+      }
+    });
+
+    document.getElementById('bulkImportBtn').addEventListener('click', async () => {
+      const bulkData = document.getElementById('bulkData').value.trim();
+
+      if (!bulkData) {
+        showMessage('Please provide JSON data to import', 'error');
+        return;
+      }
+
+      try {
+        const articles = JSON.parse(bulkData);
+
+        if (!Array.isArray(articles)) {
+          showMessage('Data must be an array of articles', 'error');
+          return;
+        }
+
+        await kbManager.importBulk(articles);
+        showMessage(`Successfully imported ${articles.length} articles!`, 'success');
+        document.getElementById('bulkData').value = '';
+      } catch (error) {
+        showMessage('Error importing articles: ' + error.message, 'error');
+      }
+    });
+  </script>
+</body>
+</html>

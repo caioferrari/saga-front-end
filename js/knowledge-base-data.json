@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Installing Google Tag Manager in Prestashop CMS",
+    "question": "How can I install the Google Tag Manager in the Prestashop CMS?",
+    "answer": "To install Google Tag Manager in Prestashop:\n\n1. Log in to your Prestashop Admin Panel\n2. Go to Modules > Module Manager\n3. Search for \"Google Tag Manager\" in the search bar\n4. Click \"Install\" on the official Google Tag Manager module\n5. After installation, click \"Configure\"\n6. Enter your GTM Container ID (format: GTM-XXXXXX)\n7. You can find your Container ID in your Google Tag Manager account under Admin > Container Settings\n8. Save the configuration\n9. Clear your Prestashop cache: Advanced Parameters > Performance > Clear Cache\n10. Test the installation using Google Tag Assistant Chrome extension\n\nImportant Notes:\n- Make sure you have a Google Tag Manager account and container created before installation\n- The Container ID is different from your Google Analytics tracking ID\n- After installation, you can manage all your tracking tags from the GTM dashboard without touching Prestashop code",
+    "category": "Technical",
+    "tags": ["Google Tag Manager", "GTM", "Prestashop", "CMS", "Installation", "Tracking"]
+  },
+  {
+    "title": "Prestashop Cache Clearing",
+    "question": "How do I clear cache in Prestashop?",
+    "answer": "To clear cache in Prestashop:\n\n1. Log in to your Prestashop Admin Panel\n2. Navigate to Advanced Parameters > Performance\n3. Scroll down to the \"Clear cache\" section\n4. Click the \"Clear cache\" button\n5. Wait for confirmation message\n\nAlternative method via FTP:\n1. Connect to your server via FTP\n2. Navigate to /var/cache folder\n3. Delete all folders inside the cache directory (dev, prod folders)\n4. The cache will automatically regenerate\n\nWhen to clear cache:\n- After installing or updating modules\n- After changing theme settings\n- When changes are not visible on the frontend\n- After modifying configuration settings",
+    "category": "Technical",
+    "tags": ["Prestashop", "Cache", "Performance", "Troubleshooting"]
+  },
+  {
+    "title": "Google Analytics 4 Setup",
+    "question": "How do I set up Google Analytics 4?",
+    "answer": "To set up Google Analytics 4 (GA4):\n\n1. Create GA4 Property:\n   - Go to Google Analytics admin panel\n   - Click \"Create Property\"\n   - Fill in property details (name, timezone, currency)\n   - Click \"Next\" and complete setup\n\n2. Get Measurement ID:\n   - In GA4 property, go to Admin > Data Streams\n   - Click on your web stream\n   - Copy the Measurement ID (format: G-XXXXXXXXXX)\n\n3. Install on Website:\n   Option A - Using GTM (Recommended):\n   - Add GA4 Configuration tag in Google Tag Manager\n   - Enter your Measurement ID\n   - Set trigger to \"All Pages\"\n\n   Option B - Direct Installation:\n   - Add GA4 tracking code to your website header\n   - Replace MEASUREMENT_ID with your actual ID\n\n4. Verify Installation:\n   - Go to GA4 Reports > Realtime\n   - Visit your website in another tab\n   - Check if your visit appears in Realtime report\n\nImportant: GA4 is different from Universal Analytics. Make sure you are using the correct Measurement ID format (G-XXXXXXXXXX, not UA-XXXXXXXXXX)",
+    "category": "Technical",
+    "tags": ["Google Analytics", "GA4", "Analytics", "Tracking", "Setup"]
+  },
+  {
+    "title": "Creating Custom Events in GTM",
+    "question": "How do I create custom events in Google Tag Manager?",
+    "answer": "To create custom events in Google Tag Manager:\n\n1. Create a Trigger:\n   - In GTM workspace, go to Triggers\n   - Click \"New\"\n   - Choose trigger type (Click, Form Submit, etc.)\n   - Configure trigger conditions\n   - Save the trigger\n\n2. Create a Tag:\n   - Go to Tags section\n   - Click \"New\"\n   - Choose tag type (GA4 Event, Universal Analytics, etc.)\n   - Configure event parameters\n   - Attach the trigger you created\n   - Save the tag\n\n3. Test in Preview Mode:\n   - Click \"Preview\" button\n   - Enter your website URL\n   - Perform the action that should trigger the event\n   - Check if the tag fires in Tag Assistant\n\n4. Publish:\n   - Click \"Submit\" when testing is successful\n   - Add version name and description\n   - Click \"Publish\"\n\nCommon Custom Events:\n- Button clicks\n- Form submissions\n- Video plays\n- PDF downloads\n- Scroll depth\n- Element visibility",
+    "category": "Technical",
+    "tags": ["GTM", "Custom Events", "Tracking", "Google Tag Manager"]
+  },
+  {
+    "title": "Fixing 404 Errors in Prestashop",
+    "question": "How do I fix 404 errors in Prestashop?",
+    "answer": "To fix 404 errors in Prestashop:\n\n1. Regenerate .htaccess:\n   - Go to Preferences > SEO & URLs\n   - Enable \"Friendly URL\"\n   - Click \"Save\"\n   - This regenerates the .htaccess file\n\n2. Check URL Rewriting:\n   - Verify mod_rewrite is enabled on your server\n   - Test with: php -m | grep rewrite\n   - If not enabled, contact your hosting provider\n\n3. Clear Cache:\n   - Go to Advanced Parameters > Performance\n   - Clear cache\n   - Test the URLs again\n\n4. Check File Permissions:\n   - .htaccess file should have 644 permissions\n   - Use FTP to verify and update if needed\n\n5. Regenerate URLs:\n   - Go to Preferences > SEO & URLs\n   - For each URL that's giving 404, click \"Regenerate\"\n   - Save changes\n\n6. Common Causes:\n   - Missing .htaccess file\n   - Incorrect rewrite rules\n   - Wrong base URL in configuration\n   - Module conflicts\n\nIf issues persist after these steps, check server error logs for specific error messages.",
+    "category": "Troubleshooting",
+    "tags": ["Prestashop", "404 Error", "Troubleshooting", "URL Rewriting"]
+  }
+]

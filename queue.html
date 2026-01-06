@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechSolutions Webao Help 3.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href='/css/style.css' rel='stylesheet'>
+</head>
+<body>
+  <main>
+    <div id="alert"></div>
+    <div class="main-container">
+      <div class="left-nav">
+        <div class="header">
+          <h1 class="logo"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></div>TechSolutions Webao Help 3.0</h1>
+        </div>
+        <div class="tips-nav">
+          <div class="tips-list">
+            <a href="/main.html" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+              <div class="tip">
+                <h6>Main</h6>
+                <p>Today's dashboard</p>
+              </div>
+            </a>
+            <a href="/chat.html" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+              <div class="tip">
+                <h6>Ask Saga</h6>
+                <p>Quick answers about processes.</p>
+              </div>
+            </a>
+            <a href="queue.html" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></div>
+              <div class="tip">
+                <h6>Queue</h6>
+                <p>Team tickets and queue status.</p>
+              </div>
+            </a>
+            <a href="/ticket-upload.html" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg></div>
+              <div class="tip">
+                <h6>Raise new ticket</h6>
+                <p>Connect with SMEs, QAs, Tls or WFMs.</p>
+              </div>
+            </a>
+            <a href="/content-upload.html" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg></div>
+              <div class="tip">
+                <h6>Upload new content</h6>
+                <p>Add new articles for Saga.</p>
+              </div>
+            </a>
+            <a href="#" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="3"></circle><path d="M12 10v6"></path><path d="M9 13h6"></path></svg></div>
+              <div class="tip">
+                <h6>Browse tickets</h6>
+                <p>Check tickets and view details.</p>
+              </div>
+            </a>
+            <a href="#" class="tip-card">
+              <div class="tip-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+              </div>
+              <div class="tip">
+                <h6>Admin</h6>
+                <p>Manage access and permisions.</p>
+              </div>
+            </a>
+            <a href="#" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></div>
+              <div class="tip">
+                <h6>System Analytics</h6>
+                <p>For overhead overviews and workflow.</p>
+              </div>
+            </a>
+            <a href="#" class="tip-card">
+              <div class="tip-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg></div>
+              <div class="tip">
+                <h6>Knowledge Base</h6>
+                <p>Add or Manage content for Saga.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="tip-card">
+            <div class="tip">
+              <h6>Supports</h6>
+              <p>For bugs or suggestios, please contact TechSol SAO team at ts-sme-all@google.com.</p>
+            </div>
+          </div>
+          <h6>Log out</h6>
+        </div>
+      </div>
+
+      <div class="right-nav">
+        <div class="dashboard-container">
+          <div class="saga-quick-input">
+            <form action="#">
+              <input type="text" name="search" placeholder="Saga Quick Consult" />
+            </form>
+          </div>
+          <div class="dashboard-grid">
+            <!-- Sample 1 -->
+            <div class="dashboard-card profile-card queue-card" data-program="Gold" data-oncall="true" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#15803D" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path class="ringing" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </i>
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color gold">Gold</div>
+                  <div class="waiting-time">Now</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Thais de Carvalho Lima</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">decarvalholima</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>Tag de Whatsapp com status 'still running' ao testar o disparo. Nós ajustamos a global do GTM no CMS e limpamos cache, testamos com e sem GCLID após também limpar os cookies no navegador, mas o disparo permanece com problema, inclusive ao validar via devtools. O que podemos fazer neste caso? Muito obrigado! CID 6051013270 website https://ferreiraviana.adv.br/ CMS WordPress GTM-TKFCP7RP</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            <!-- Sample 2 -->
+            <div class="dashboard-card profile-card queue-card" data-program="LM" data-oncall="true" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#15803D" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path class="ringing" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </i>
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color live-meet">Live Meet</div>
+                  <div class="waiting-time">1min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Juliana Alves Ribeiro</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">jalvesribeiro</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+
+            <!-- Sample 3 -->
+            <div class="dashboard-card profile-card queue-card" data-program="LM" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color live-meet">Live Meet</div>
+                  <div class="waiting-time">12min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Histyanailehts Garcia</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">histyanailehts</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>@cferrari Eu fiz os ajustes que você neste caso. Hoje eu estou tentando fazer os testes de uma conversão de compra neste site https://teleachatboutique.com/ , mas o Tag assistant não vincula e o GTM está instalado GTM-NC8BHMW GTM-NC8BHMW https://screenshot.googleplex.com/UksHiSX3XYv4Jc5 https://screenshot.googleplex.com/4ao44K9ZDUNPxzS No dias das consultorias tudo funcionou certinho. O que poderia estar acontecendo? O site é da Espanha e já tentei vincular con VPN conetada.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            <!-- Sample 4 -->
+            <div class="dashboard-card profile-card queue-card" data-program="Gold" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color gold">Gold</div>
+                  <div class="waiting-time">1min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Patricia dos Santos</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">ppdossantos</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            <!-- Sample 4 e meio -->
+            <div class="dashboard-card profile-card queue-card" data-program="Titanium" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color titanium">Titanium</div>
+                  <div class="waiting-time">1min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Marcia Tzannis</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">tzannis</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            <!-- Sample 4 e meio + -->
+            <div class="dashboard-card profile-card queue-card" data-program="Platinum" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color platinum">Platinum</div>
+                  <div class="waiting-time">1h+</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Xamary Aponte</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">xamary</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+
+            <!-- Sample 5 -->
+            <div class="dashboard-card profile-card queue-card" data-program="Silver" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color silver">Silver</div>
+                  <div class="waiting-time">19min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Naiara Almeida</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">marianaiara</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            
+            <!-- Sample 6 -->
+            <div class="dashboard-card profile-card queue-card" data-program="Bronze" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color bronze">Bronze</div>
+                  <div class="waiting-time">3min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Aline Gerlinzer</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">agerlinzer</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            
+            <!-- Sample 7 -->
+            <div class="dashboard-card profile-card queue-card" data-program="Bronze" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color bronze">Bronze</div>
+                  <div class="waiting-time">5min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Ana Valentina Estaba</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">estaba</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>Continuação cferrari@.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            
+            <!-- Sample 8 -->
+            <div class="dashboard-card profile-card queue-card" data-program="LM" data-oncall="true" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <h3>8-5717000039978</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color bronze">Bronze</div>
+                  <div class="waiting-time">16min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Yabeth Alexandra Mejias Ascanio</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">yabetha</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>Boa tarde time, tudo bem? preciso de ajuda com o caso, porque assim no momento da consultoria para o cliente no disparou a conversão, mas para mim disparou certinho, apos os 7 dias na hora de realizar as provas a etiqueta não disparou, o evento de submit dispara a etiqueta para GA4 dispara mas para Ads não, poderiame ajudar por gentileza: https://ontrack.global/cotizar-rastreo-satelital-vehiculos/ GTM-PDF3XZG https://screenshot.googleplex.com/42cfMJEe2C8DZbT https://screenshot.googleplex.com/94FFq6qkwDcg3j8</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+
+            <!-- Sample 9 -->
+            <div class="dashboard-card profile-card queue-card" data-program="Gold" data-oncall="true" data-status="Waiting">
+              <div class="card-header">
+                <h3>5-1761000040347</h3>
+                <div class="status-badge program-badge">
+                  <div class="program-color qa">DSAT</div>
+                  <div class="waiting-time">Now</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Yuli Costa</h2>
+                  <p class="role" id="userRole">QA</p>
+                  <p class="ldap" id="userLdap">yulic</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>Tag de Whatsapp com status 'still running' ao testar o disparo. Nós ajustamos a global do GTM no CMS e limpamos cache, testamos com e sem GCLID após também limpar os cookies no navegador, mas o disparo permanece com problema, inclusive ao validar via devtools. O que podemos fazer neste caso? Muito obrigado! CID 6051013270 website https://ferreiraviana.adv.br/ CMS WordPress GTM-TKFCP7RP</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <button class="take" title="Take">Take</button>
+              </div>
+            </div>
+            <!-- SAMPLE 01 [OPEN] -->
+            <div class="dashboard-card profile-card queue-card take-card" data-program="Bronze" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#15803D" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path class="ringing" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </i>
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color live-meet">Live Meet</div>
+                  <div class="waiting-time">1min</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Mariana Oliveira</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">oliveiramd</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g.</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <div class="action-buttons">
+                  <button class="take close toggle-form" title="Close" type="button">Close</button>
+                  <button class="return-btn" title="Return to queue" type="button">Return to queue</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- SAMPLE 02 [OPEN] -->
+            <div class="dashboard-card profile-card queue-card take-card" data-program="DSAT" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <div class="case-id">
+                  <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#15803D" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path class="ringing" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </i>
+                  <h3>6-8909000040070</h3>
+                </div>
+                <div class="status-badge program-badge">
+                  <div class="program-color gold">Gold</div>
+                  <div class="waiting-time">Now</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Rosa Linda Perez Vera</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">lindaperezvera</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>Tag de Whatsapp com status 'still running' ao testar o disparo. Nós ajustamos a global do GTM no CMS e limpamos cache, testamos com e sem GCLID após também limpar os cookies no navegador, mas o disparo permanece com problema, inclusive ao validar via devtools. O que podemos fazer neste caso? Muito obrigado! CID 6051013270 website https://ferreiraviana.adv.br/ CMS WordPress GTM-TKFCP7RP</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com/</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpress</span></li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-4422</span></li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-1451939915</span></li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7RP</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <div class="action-buttons">
+                  <button class="take close toggle-form" title="Close" type="button">Close</button>
+                  <button class="return-btn" title="Return to queue" type="button">Return to queue</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SAMPLE 03 [OPEN]-->
+            <div class="dashboard-card profile-card queue-card take-card" data-program="Bronze" data-oncall="false" data-status="Waiting">
+              <div class="card-header">
+                <h3>5-1761000040347</h3>
+                <div class="status-badge program-badge">
+                  <div class="program-color bronze">Bronze</div>
+                  <div class="waiting-time">Now</div>
+                </div>
+              </div>
+              <div class="profile-content">
+                <div class="profile-avatar">
+                  <div class="avatar-circle" id="userAvatar">JS</div>
+                </div>
+                <div class="profile-info">
+                  <h2 id="userName">Silenny Rojas</h2>
+                  <p class="role" id="userRole">Agent</p>
+                  <p class="ldap" id="userLdap">silenny</p>
+                </div>
+              </div>
+              <div class="profile-actions">
+                <div class="case-description">
+                  <div class="text-content">
+                    <p>Tag de Whatsapp com status 'still running' ao testar o disparo. Nós ajustamos a global do GTM no CMS e limpamos cache, testamos com e sem GCLID após também limpar os cookies no navegador, mas o disparo permanece com problema, inclusive ao validar via devtools. O que podemos fazer neste caso? Muito obrigado! CID 6051013270 website https://ferreiraviana.adv.br/ CMS WordPress GTM-TKFCP7RP</p>
+                    <ul>
+                      <li class="case-website"><b>Site: </b><span>https://site.com</span></li>
+                      <li class="case-cms"><b>CMS: </b><span>Wordpres</span>s/li>
+                      <li class="case-cid"><b>CID: </b><span>123-134-442</span>2/li>
+                      <li class="case-ga4"><b>GA4: </b><span>G-145193991</span>5/li>
+                      <li class="case-gtm"><b>GTM: </b><span>GTM-TKFCP7R</span>P/li>
+                    </ul>
+                  </div>
+                </div>
+                <button class="read-more-btn">Leia mais</button>
+                <div class="action-buttons">
+                  <button class="take close toggle-form" title="Close" type="button">Close</button>
+                  <button class="return-btn" title="Return to queue" type="button">Return to queue</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/formValidation.js"></script>
+  <script src="js/cardsManagement.js"></script>
+</body>
+</html>

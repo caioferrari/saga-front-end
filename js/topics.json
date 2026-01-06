@@ -1,0 +1,125 @@
+{
+  "team" : {
+    "sme": {
+      "tasks": [
+        "ACe",
+        "Ads Conversion Tracking",
+        "Ads Conversion Tracking Troubleshooting",
+        "Ads Dinamyc Remarketing - Non-Retail",
+        "Ads Dinamyc Remarketing - Retail",
+        "Ads Enhanced Conversions",
+        "Ads Lead Scoring",
+        "Ads Remarketing",
+        "Ads Website Call Conversion",
+        "Agent Assist (SPA)",
+        "Analytics E-Commerce Tracking",
+        "Analytics Enhanced E-commerce Tracking",
+        "Analytics Event Tracking",
+        "Analytics Health Check",
+        "Analytics Remarketing",
+        "Analytics Setup",
+        "Analytics Troubleshooting",
+        "CMS",
+        "Consent Mode",
+        "Conversion with Cart Data (CwCD)",
+        "Cross Domain Tracking",
+        "Customer Match",
+        "DSAT not valid",
+        "DSAT valid",
+        "Enhanced Conversions for Leads",
+        "Escalation not valid",
+        "Escalation valid",
+        "Firebase Implementation",
+        "Firebase Migration",
+        "Fix Sitewide Tagging (OGT & CT)",
+        "GA360 Migration",
+        "GA4 Cost Data Import",
+        "GA4 Migration",
+        "Google Tag Gateway",
+        "Google Tag Manager Installation",
+        "Import from Phone Calls",
+        "Javascript/HTML/CSS",
+        "Lead Form Ads",
+        "Measurement Protocol",
+        "Monitoring",
+        "New Customer Acquisition",
+        "OCT Legacy GCLID",
+        "On-Device Measurement",
+        "Outro",
+        "SA360 Enhanced Conversions",
+        "Server-To-Server",
+        "Shopping Feed Audit",
+        "Shopping Feed Optimization",
+        "Shopping Implement Product Ratings",
+        "Shopping Implement Sale Badge",
+        "Shopping Onboarding",
+        "Shopping Online feed hygiene audit",
+        "Shopping Zombie SKU Audit / Implementation",
+        "tROAS",
+        "UPD for GA4",
+        "UPD via Measurement Protocol",
+        "Web To App Connect (w2ac)"
+      ],
+      "CMS": [
+        "Shopify",
+        "WordPress",
+        "WooCommerce",
+        "Yampi",
+        "CartPanda",
+        "Hotmart",
+        "Wix",
+        "OpenCart",
+        "Prestashop",
+        "Magento",
+        "Other",
+        "Google Sites",
+        "wBuy",
+        "Plesk",
+        "SquareSpace",
+        "Canva",
+        "Locaweb",
+        "GoDaddy's Website Builder"
+      ]
+    },
+    "qa" : {
+      "tasks": [
+        "DSAT"
+      ]
+    }
+  },
+  "topics" : {
+    "programLevel" : [
+      "LM",
+      "Gold",
+      "Silver",
+      "Bronze",
+      "Titanium",
+      "Platinum",
+      "DSAT"
+    ],
+    "taskType" : [
+      "Tag",
+      "Shopping",
+      "OCT"
+    ],
+    "problemCategory" : [
+      "Knowledge Base",
+      "Product Gap",
+      "SOP Gap"
+    ],
+    "statusCategory" : [
+      "Solved",
+      "Not Solved - Still in Progress",
+      "Not Solved - Out of Scope",
+      "Not Solved - Without Solution",
+      "Reroute - Split to M&A",
+      "Reroute - Consult"
+    ],
+    "teams" : [
+      "SME",
+      "QA",
+      "TL",
+      "WFM"
+    ]
+  }
+}

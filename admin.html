@@ -65,7 +65,7 @@
                 <p>Check tickets and view details.</p>
               </div>
             </a>
-            <a href="#" class="tip-card">
+            <a href="admin.html" class="tip-card">
               <div class="tip-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="3"></circle>
@@ -74,7 +74,7 @@
               </div>
               <div class="tip">
                 <h6>Admin</h6>
-                <p>Manage access and permisions.</p>
+                <p>Manage access and permissions.</p>
               </div>
             </a>
             <a href="#" class="tip-card">
@@ -105,10 +105,135 @@
       </div>
       
       <div class="right-nav">
-        <!--LAYOUT HERE-->
+        <div class="dashboard-container">
+          <div class="saga-quick-input">
+            <form action="#">
+              <input type="text" name="search" id="userSearch" placeholder="Search users by name or LDAP" />
+            </form>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- Admin Overview Cards -->
+            <div class="dashboard-card admin-stats-card">
+              <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <h3>System Overview</h3>
+              </div>
+              <div class="admin-stats">
+                <div class="stat-item">
+                  <span class="stat-value" id="totalUsers">0</span>
+                  <span class="stat-label">Total Users</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value" id="activeUsers">0</span>
+                  <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value" id="inactiveUsers">0</span>
+                  <span class="stat-label">Inactive Users</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add New User Card -->
+            <div class="dashboard-card new-user-card">
+              <div class="card-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                <h3>Add New User</h3>
+              </div>
+              <form id="addUserForm" class="admin-form">
+                <input type="text" id="newUserLdap" name="ldap" placeholder="LDAP (e.g., cferrari)" required />
+                <input type="text" id="newUserFullName" name="fullName" placeholder="Full Name" required />
+                <input type="email" id="newUserEmail" name="email" placeholder="Email Address" required />
+                <select id="newUserRole" name="role" required>
+                  <option value="">Select Role</option>
+                  <option value="Agent">Agent</option>
+                  <option value="SME">SME</option>
+                  <option value="QA">QA</option>
+                  <option value="TL">TL</option>
+                  <option value="WFM">WFM</option>
+                </select>
+                <select id="newUserStatus" name="status" required>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+                <button type="submit" class="btn-primary">Add User</button>
+              </form>
+            </div>
+
+            <!-- Users List Card -->
+            <div class="dashboard-card users-list-card">
+              <div class="card-header">
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  <h3>User Management</h3>
+                </div>
+                <div class="filter-buttons">
+                  <button class="filter-btn active" data-filter="all">All</button>
+                  <button class="filter-btn" data-filter="active">Active</button>
+                  <button class="filter-btn" data-filter="inactive">Inactive</button>
+                  <button class="filter-btn" data-filter="SME">SME</button>
+                  <button class="filter-btn" data-filter="QA">QA</button>
+                  <button class="filter-btn" data-filter="TL">TL</button>
+                  <button class="filter-btn" data-filter="Agent">Agent</button>
+                </div>
+              </div>
+              <div class="users-table-container">
+                <table class="users-table">
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>LDAP</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="usersTableBody">
+                    <tr>
+                      <td colspan="5" class="loading">Loading users...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit User Modal -->
+        <div id="editUserModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Edit User</h3>
+              <span class="close-modal">&times;</span>
+            </div>
+            <form id="editUserForm" class="admin-form">
+              <input type="hidden" id="editUserId" name="id" />
+              <input type="text" id="editUserLdap" name="ldap" placeholder="LDAP" required />
+              <input type="text" id="editUserFullName" name="fullName" placeholder="Full Name" required />
+              <input type="email" id="editUserEmail" name="email" placeholder="Email Address" required />
+              <select id="editUserRole" name="role" required>
+                <option value="Agent">Agent</option>
+                <option value="SME">SME</option>
+                <option value="QA">QA</option>
+                <option value="TL">TL</option>
+                <option value="WFM">WFM</option>
+              </select>
+              <select id="editUserStatus" name="status" required>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+              <div class="modal-actions">
+                <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                <button type="submit" class="btn-primary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </main>
   <script src="js/main.js"></script>
+  <script type="module" src="js/admin.js"></script>
 </body>
 </html>

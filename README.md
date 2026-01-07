@@ -22,12 +22,21 @@ An AI-powered knowledge base chatbot for TechSolutions support team.
 - Team status tracking
 - Knowledge base analytics
 
+### Admin Panel
+- User management system
+- Add, edit, and delete users
+- Role-based access control (SME, Agent, QA, TL, WFM)
+- User status management (active/inactive)
+- Search and filter users
+- Real-time statistics dashboard
+
 ## Quick Start
 
 1. Configure Supabase credentials in `js/supabase-config.js`
 2. Open `index.html` to log in
 3. Navigate to `chat.html` to use the AI assistant
-4. Use `knowledge-admin.html` to manage content
+4. Use `admin.html` to manage users and access controls
+5. Use `content-upload.html` to add knowledge base content
 
 ## Documentation
 

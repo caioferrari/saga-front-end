@@ -65,7 +65,7 @@
                 <p>Check tickets and view details.</p>
               </div>
             </a>
-            <a href="#" class="tip-card">
+            <a href="admin.html" class="tip-card">
               <div class="tip-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="3"></circle>
@@ -119,7 +119,7 @@
               </div>
               <div class="new-ticket-fields" id="newTicketFields">
                 <form action="#" class="upload-form" id="ticketForm">
-                  <input type="text" id="caseId" name="caseId" placeholder="Enter case ID" aria-required="true" aria-errormessage="We need to know your case ID" />
+                  <input type="text" id="caseId" name="caseId" placeholder="Case ID. Ex: 1-1234567890" aria-required="true" aria-errormessage="We need to know your case ID" aria-invalid="false" aria-describedby="caseId-helper" autocomplete="off" />
                   <div class="custom-select-container multi-select" data-source="topics.taskType">
                     <input type="hidden" name="caseType" class="hidden-tasks-input" aria-required="true" aria-errormessage="Inform the type of your case's task" />
                     <div class="select-trigger">
@@ -147,9 +147,21 @@
                     </div>
                     <ul class="select-options"></ul>
                   </div>
+                  <input type="text" name="websiteURL" placeholder="Website URL" aria-required="false" aria-invalid="false" autocomplete="off" />
+                  <div class="google-products">
+                    <input type="text" name="googleProductsCID" placeholder="CID or Ext. CID" aria-required="false" autocomplete="off" />
+                    <input type="text" name="googleProductsGA4" placeholder="GA4" aria-required="false" autocomplete="off" />
+                    <input type="text" name="googleProductsGTM" placeholder="GTM" aria-required="false" autocomplete="off" />
+                    <input type="text" name="googleProductsMCID" placeholder="MCID" aria-required="false" autocomplete="off" />
+                  </div>
                   <div class="checkbox-group">
-                    <input type="checkbox" id="onCall" name="onCall" /> 
-                    <label for="onCall">Are you on call?</label>
+                    <div>Are you on call?</div>
+                    <div>
+                      <label for="onCall">Yes</label>
+                      <input type="radio" id="onCall" name="OnCall" aria-required="true" aria-errormessage="Let us know if are on call." />
+                      <label for="notOnCall">No</label>
+                      <input type="radio" id="notOnCall" name="OnCall" />
+                    </div>
                   </div>
                   <textarea id="problemDescription" name="problemDescription" placeholder="Describe the problem in detail..." aria-required="true" aria-errormessage="We'd like to know more about your ticket. Please add details."></textarea>
                   <button type="submit" class="btn btn-primary" title="OK">Submit Ticket</button>

@@ -684,7 +684,7 @@ h1.logo {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 99991;
   display: flex;
   background: rgba(0, 0, 0, 0.3); 
   justify-content: center;
@@ -1064,7 +1064,7 @@ h1.logo {
   
     &.expanded {
       .text-content {
-        max-height: 1000px; /* Garante que o conteúdo apareça */
+        max-height: 1000px;
         
         &::after {
           opacity: 0;
@@ -1272,6 +1272,35 @@ form#queueFormClose {
     -webkit-appearance: none;
   }
 
+  input[type="radio"],
+  input[type="checkbox"] {
+    width: inherit;
+    height: inherit;
+    border: inherit;
+    appearance: button;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  .checkbox-group {
+    color: #6B7280;
+    display: inherit;
+
+    div:nth-child(2) {
+      display:flex;
+    }
+
+    label {
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+  }
+
+  .google-products {
+    display: flex;
+    gap: 15px;
+  }
+
   .last-options {
     display: flex;
     gap: 10px;
@@ -1365,6 +1394,55 @@ form#queueFormClose {
     }
   }
 
+  .text-tag-container {
+    font-size: 14px;
+    .select-trigger {
+      display: flex;
+      flex-wrap: wrap; 
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid #ccc;
+      cursor: text;
+
+      .selected-tags {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 5px;
+
+        .tag-free-input {
+          min-width: 120px;
+          border: none !important;
+          outline: none !important;
+          flex: 1;
+        }
+        .tag {
+          font-size: 13px;
+          display: inline-flex;
+          align-items: center;
+          background: #eee;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          padding: 2px 8px;
+          color: #333;
+          white-space: nowrap;
+
+          .remove-tag {
+            margin-left: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #999;
+
+            &:hover {
+              color: #f00;
+            }
+          }
+        }
+      }
+    }
+  }
+
   input::placeholder,
   textarea::placeholder {
     font-size: 15px;
@@ -1375,18 +1453,18 @@ form#queueFormClose {
   select:focus,
   textarea:focus {
     outline: none;
-    border-bottom: 2px solid #2A7B9B; /* Visual feedback on focus */
+    border-bottom: 2px solid #2A7B9B; 
     background: none;
   }
 
   textarea {
     font-size: 15px;
-    height: 100px; /* Textareas usually need more height */
+    height: 100px;
     resize: vertical;
   }
 
   button[type='submit'] {
-    width: 100%; /* Makes button fit the form width */
+    width: 100%;
     height: 50px;
     font-size: 13px;
     font-weight: bold;
@@ -1852,18 +1930,18 @@ form#queueFormClose {
     select:focus,
     textarea:focus {
       outline: none;
-      border-bottom: 2px solid #2A7B9B; /* Visual feedback on focus */
+      border-bottom: 2px solid #2A7B9B;
       background: none;
     }
   
     textarea {
       font-size: 15px;
-      height: 100px; /* Textareas usually need more height */
+      height: 100px;
       resize: vertical;
     }
   
     button[type='submit'] {
-      width: 100%; /* Makes button fit the form width */
+      width: 100%;
       height: 50px;
       font-size: 13px;
       font-weight: bold;

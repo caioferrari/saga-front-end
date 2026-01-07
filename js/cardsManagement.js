@@ -18,7 +18,6 @@ document.querySelectorAll(".read-more-btn").forEach(btn => {
 });
 
 /* CLOSING FORM CARD */
-
 const getFormTemplate = (data) => {
   const configData = window.appConfigData;
   
@@ -144,6 +143,7 @@ document.addEventListener("click", (e) => {
     if(typeof loadingBox === "function") loadingBox();
     
     card.classList.add("take-card");
+    card.dataset.status = "In Progress";
     container.appendChild(card);
     
     const data = getCardData(card);
@@ -200,6 +200,7 @@ document.addEventListener("click", (e) => {
       
       targetCard.classList.remove("take-card");
       targetCard.removeAttribute("data-status-temp");
+      targetCard.dataset.status = "On Queue";
       
       container.insertBefore(targetCard, container.firstChild);
     }
@@ -220,3 +221,42 @@ const closePrompt = () => {
     alertBox.classList.remove("alert-container");
   }
 };
+
+/* REGEX (TEXT TO LINK) */
+function linkifyCards() {
+  const cards = document.querySelectorAll('.dashboard-card');
+
+  // Regex melhorado: 
+  // 1. Pega links com protocolo (http/https)
+  // 2. Pega links começando com www
+  // 3. Pega domínios (palavra.extensão) que não sejam seguidos apenas por letras (evita falsos positivos)
+  const urlRegex = /((https?:\/\/|www\.)[^\s]+|(?<!@)([a-zA-Z0-9-]+\.)+(com|net|org|edu|gov|br|io|adv\.br|me|app)[^\s]*)/gi;
+
+  cards.forEach(card => {
+    // Tratando o parágrafo e a lista
+    const targets = card.querySelectorAll('.case-description .text-content p, .case-website span');
+    
+    targets.forEach(target => {
+      // Usamos textContent para a busca original e innerHTML para a substituição
+      const originalHTML = target.innerHTML;
+      
+      const newHTML = originalHTML.replace(urlRegex, (url) => {
+        // Remove pontos ou vírgulas que fiquem colados no final da URL (comum em textos)
+        const cleanUrl = url.replace(/[.,]$/, "");
+        
+        // Define o link correto para o href
+        let href = cleanUrl;
+        if (!cleanUrl.startsWith('http')) {
+          href = `https://${cleanUrl}`;
+        }
+
+        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`;
+      });
+
+      target.innerHTML = newHTML;
+    });
+  });
+}
+
+// Chame a função após carregar os cards ou ao iniciar a página
+linkifyCards();

@@ -28,10 +28,10 @@ const promptBox = (emojicon, alertTitle, alertMessage) => {
       <a title="Cancel">Cancel</a>
     </div>
   `
-  document.querySelector("#alert a[title='OK']").addEventListener("click", () => {
-    document.querySelector("#alert").classList.remove("alert-container");
-    document.querySelector("#alert").innerHTML = "";
-  });
+  // document.querySelector("#alert a[title='OK']").addEventListener("click", () => {
+  //   document.querySelector("#alert").classList.remove("alert-container");
+  //   document.querySelector("#alert").innerHTML = "";
+  // });
 }
 // promptBox("⚠️", "ALERTA", "Mensagem importante");
 

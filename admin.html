@@ -106,14 +106,7 @@
       
       <div class="right-nav">
         <div class="dashboard-container">
-          <div class="saga-quick-input">
-            <form action="#">
-              <input type="text" name="search" id="userSearch" placeholder="Search users by name or LDAP" />
-            </form>
-          </div>
-
-          <div class="dashboard-grid">
-            <!-- Admin Overview Cards -->
+          <div class="dashboard-grid admin-page">
             <div class="dashboard-card admin-stats-card">
               <div class="card-header">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -142,10 +135,10 @@
                 <h3>Add New User</h3>
               </div>
               <form id="addUserForm" class="admin-form">
-                <input type="text" id="newUserLdap" name="ldap" placeholder="LDAP (e.g., cferrari)" required />
-                <input type="text" id="newUserFullName" name="fullName" placeholder="Full Name" required />
-                <input type="email" id="newUserEmail" name="email" placeholder="Email Address" required />
-                <select id="newUserRole" name="role" required>
+                <input type="text" id="newUserLdap" name="ldap" placeholder="LDAP" aria-required="true" aria-errormessage="LDAP is required" />
+                <input type="text" id="newUserFullName" name="fullName" placeholder="Full Name" aria-required="true" aria-errormessage="Please, provide new user full name" />
+                <input type="email" id="newUserEmail" name="email" placeholder="Email Address" aria-required="true" aria-errormessage="Email is required" />
+                <select id="newUserRole" name="role" aria-required="true" aria-errormessage="Select a role">
                   <option value="">Select Role</option>
                   <option value="Agent">Agent</option>
                   <option value="SME">SME</option>
@@ -153,7 +146,7 @@
                   <option value="TL">TL</option>
                   <option value="WFM">WFM</option>
                 </select>
-                <select id="newUserStatus" name="status" required>
+                <select id="newUserStatus" name="status" aria-required="true">
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                 </select>
@@ -170,15 +163,21 @@
                 </div>
                 <div class="filter-buttons">
                   <button class="filter-btn active" data-filter="all">All</button>
+                  <span>•</span>
                   <button class="filter-btn" data-filter="active">Active</button>
                   <button class="filter-btn" data-filter="inactive">Inactive</button>
+                  <span>•</span>
+                  <button class="filter-btn" data-filter="Agent">Agent</button>
                   <button class="filter-btn" data-filter="SME">SME</button>
                   <button class="filter-btn" data-filter="QA">QA</button>
                   <button class="filter-btn" data-filter="TL">TL</button>
-                  <button class="filter-btn" data-filter="Agent">Agent</button>
+                  <button class="filter-btn" data-filter="WFM">WFM</button>
                 </div>
               </div>
               <div class="users-table-container">
+                <form action="#">
+                  <input type="text" name="search" id="userSearch" placeholder="Search users by name or LDAP" autocomplete="off" />
+                </form>
                 <table class="users-table">
                   <thead>
                     <tr>
@@ -199,41 +198,11 @@
             </div>
           </div>
         </div>
-
-        <!-- Edit User Modal -->
-        <div id="editUserModal" class="modal">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3>Edit User</h3>
-              <span class="close-modal">&times;</span>
-            </div>
-            <form id="editUserForm" class="admin-form">
-              <input type="hidden" id="editUserId" name="id" />
-              <input type="text" id="editUserLdap" name="ldap" placeholder="LDAP" required />
-              <input type="text" id="editUserFullName" name="fullName" placeholder="Full Name" required />
-              <input type="email" id="editUserEmail" name="email" placeholder="Email Address" required />
-              <select id="editUserRole" name="role" required>
-                <option value="Agent">Agent</option>
-                <option value="SME">SME</option>
-                <option value="QA">QA</option>
-                <option value="TL">TL</option>
-                <option value="WFM">WFM</option>
-              </select>
-              <select id="editUserStatus" name="status" required>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-              <div class="modal-actions">
-                <button type="button" class="btn-secondary cancel-btn">Cancel</button>
-                <button type="submit" class="btn-primary">Save Changes</button>
-              </div>
-            </form>
-          </div>
-        </div>
       </div>
     </div>
   </main>
   <script src="js/main.js"></script>
+  <script src="js/formValidation.js"></script>
   <script type="module" src="js/admin.js"></script>
 </body>
 </html>

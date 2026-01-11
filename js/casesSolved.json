@@ -1,0 +1,338 @@
+[
+  {
+    "caseID": "6-8909000040070",
+    "name": "Thais de Carvalho Lima",
+    "ldap": "decarvalholima",
+    "role": "Agent",
+    "program": "Gold",
+    "onCall": true,
+    "status": "Solved",
+    "waitingTime": "30min",
+    "description": "Tag de Whatsapp com status 'still running' ao testar o disparo. Nós ajustamos a global do GTM no CMS e limpamos cache, testamos com e sem GCLID após também limpar os cookies no navegador, mas o disparo permanece com problema, inclusive ao validar via devtools. O que podemos fazer neste caso? Muito obrigado! CID 6051013270 website https://ferreiraviana.adv.br/ CMS WordPress GTM-TKFCP7RP",
+    "addons": [
+      {
+        "site": "https://ferreiraviana.adv.br/",
+        "CMS": "WordPress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Juliana Alves Ribeiro",
+    "ldap": "jalvesribeiro",
+    "role": "Agent",
+    "program": "Live Meet",
+    "onCall": true,
+    "status": "Solved",
+    "waitingTime": "1min",
+    "description": "No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente, e o GTM tbm conecta normalmente ao site, porém não é possível processguir com o teste porque da uma mensagem de bloqueio. Como resolver esse problema? Obs: A tag de formulário não dispara no Google Ads tem mais de 3 meses (provavelmente por conta disso); SS: https://screenshot.googleplex.com/sx7ixXHYGA3Lm2g",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Histyanailehts Garcia",
+    "ldap": "histyanailehts",
+    "role": "Agent",
+    "program": "Live Meet",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "12min",
+    "description": "@cferrari Eu fiz os ajustes que você neste caso. Hoje eu estou tentando fazer os testes de uma conversão de compra neste site https://teleachatboutique.com/ , mas o Tag assistant não vincula e o GTM está instalado GTM-NC8BHMW GTM-NC8BHMW https://screenshot.googleplex.com/UksHiSX3XYv4Jc5 https://screenshot.googleplex.com/4ao44K9ZDUNPxzS No dias das consultorias tudo funcionou certinho. O que poderia estar acontecendo? O site é da Espanha e já tentei vincular con VPN conetada.",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Patricia dos Santos",
+    "ldap": "ppdossantos",
+    "role": "Agent",
+    "program": "Gold",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "1min",
+    "description": "No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente...",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Marcia Tzannis",
+    "ldap": "tzannis",
+    "role": "Agent",
+    "program": "Titanium",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "1min",
+    "description": "No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente...",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Xamary Aponte",
+    "ldap": "xamary",
+    "role": "Agent",
+    "program": "Platinum",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "1h+",
+    "description": "No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente...",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Naiara Almeida",
+    "ldap": "marianaiara",
+    "role": "Agent",
+    "program": "Silver",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "19min",
+    "description": "No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente...",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Aline Gerlinzer",
+    "ldap": "agerlinzer",
+    "role": "Agent",
+    "program": "Bronze",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "3min",
+    "description": "No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente...",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Ana Valentina Estaba",
+    "ldap": "estaba",
+    "role": "Agent",
+    "program": "Bronze",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "5min",
+    "description": "Continuação cferrari@.",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "8-5717000039978",
+    "name": "Yabeth Alexandra Mejias Ascanio",
+    "ldap": "yabetha",
+    "role": "Agent",
+    "program": "Live Meet",
+    "onCall": true,
+    "status": "Solved",
+    "waitingTime": "16min",
+    "description": "Boa tarde time, tudo bem? preciso de ajuda com o caso... Site: https://ontrack.global/cotizar-rastreo-satelital-vehiculos/",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "cferrari"
+  },
+  {
+    "caseID": "5-1761000040347",
+    "name": "Yuli Costa",
+    "ldap": "yulic",
+    "role": "QA",
+    "program": "Gold",
+    "onCall": true,
+    "status": "Solved",
+    "waitingTime": "30min",
+    "description": "Tag de Whatsapp com status 'still running'...",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "sousaw"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Mariana Oliveira",
+    "ldap": "oliveiramd",
+    "role": "Agent",
+    "program": "Live Meet",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "1min",
+    "description": "No site https://www3.iberlim.pt/contactos/ mostra que tem o GTM-598HQT9W instalado normalmente...",
+    "addons": [
+      {
+        "site": "https://site.com/",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "ricardogi"
+  },
+  {
+    "caseID": "6-8909000040070",
+    "name": "Angeles Victoria Guerra Azocar",
+    "ldap": "vangeles",
+    "role": "Agent",
+    "program": "Gold",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "30min",
+    "description": "Boa tarde, preciso de ajuda com este caso. Instalamos o Google Tag Manager no site e, no início, tudo funcionou corretamente... Site: www.katzebel.com GTM: GTM-MB8PGRK6.",
+    "addons": [
+      {
+        "site": "site.com",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "kmelo"
+  },
+  {
+    "caseID": "5-1761000040347",
+    "name": "Silenny Rojas",
+    "ldap": "silenny",
+    "role": "Agent",
+    "program": "Bronze",
+    "onCall": false,
+    "status": "Solved",
+    "waitingTime": "30min",
+    "description": "Tag de Whatsapp com status 'still running'...",
+    "addons": [
+      {
+        "site": "https://site.com",
+        "CMS": "Wordpress",
+        "CID": "123-134-4422",
+        "GA4": "G-1451939915",
+        "GTM": "GTM-TKFCP7RP"
+      }
+    ],
+    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "overhead" : "SME",
+    "helper" : "kmelo"
+  }
+]

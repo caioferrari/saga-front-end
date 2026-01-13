@@ -43,6 +43,59 @@ const updateStats = () => {
   document.querySelector("#totalTickets").textContent = totalTickets;
   document.querySelector("#avgWaitTime").textContent = avgWaitTime + "min";
   document.querySelector("#smeTickets").textContent = smeTickets;
+
+  updateCasesOverview();
+};
+
+const updateCasesOverview = () => {
+  const casesData = {
+    gold: allTickets.filter(t => t.program === "Gold").length,
+    silver: allTickets.filter(t => t.program === "Silver").length,
+    bronze: allTickets.filter(t => t.program === "Bronze").length,
+    platinum: allTickets.filter(t => t.program === "Platinum").length,
+    titanium: allTickets.filter(t => t.program === "Titanium").length,
+    dsat: allTickets.filter(t => t.program === "DSAT").length
+  };
+
+  const totalCases = Object.values(casesData).reduce((acc, val) => acc + val, 0);
+
+  if(document.getElementById('totalCases')) {
+    document.getElementById('totalCases').textContent = totalCases;
+  }
+  if(document.getElementById('goldCases')) {
+    document.getElementById('goldCases').textContent = casesData.gold;
+  }
+  if(document.getElementById('silverCases')) {
+    document.getElementById('silverCases').textContent = casesData.silver;
+  }
+  if(document.getElementById('bronzeCases')) {
+    document.getElementById('bronzeCases').textContent = casesData.bronze;
+  }
+  if(document.getElementById('platinumCases')) {
+    document.getElementById('platinumCases').textContent = casesData.platinum;
+  }
+  if(document.getElementById('titaniumCases')) {
+    document.getElementById('titaniumCases').textContent = casesData.titanium;
+  }
+  if(document.getElementById('dsatCases')) {
+    document.getElementById('dsatCases').textContent = casesData.dsat;
+  }
+
+  const updateProgressBar = (barId, value) => {
+    const bar = document.getElementById(barId);
+    if(bar && totalCases > 0) {
+      const percentage = (value / totalCases) * 100;
+      bar.style.width = `${percentage}%`;
+      bar.style.transition = 'width 0.5s ease-in-out';
+    }
+  };
+
+  updateProgressBar('goldBar', casesData.gold);
+  updateProgressBar('silverBar', casesData.silver);
+  updateProgressBar('bronzeBar', casesData.bronze);
+  updateProgressBar('platinumBar', casesData.platinum);
+  updateProgressBar('titaniumBar', casesData.titanium);
+  updateProgressBar('dsatBar', casesData.dsat);
 };
 
 // 3. Filtro Mestre (Busca e Botões)
@@ -354,28 +407,6 @@ const attachEventListeners = () => {
     });
   });
 };
-
-// 9. Export Functionality
-document.querySelector("#exportBtn")?.addEventListener("click", () => {
-  const csvContent = "data:text/csv;charset=utf-8,"
-    + "Case ID,Name,LDAP,Program,Helper,Status,Time Raised,Time Taken,Time Closed,Description\n"
-    + allTickets.map(t => {
-        const waitTime = calculateWaitTime(t.timeRaised, t.timeClosed);
-        return `"${t.caseID}","${t.name}","${t.ldap}","${t.program}","${t.helper}","${t.status}","${formatDate(t.timeRaised)}","${formatDate(t.timeTaken)}","${formatDate(t.timeClosed)}","${t.description.replace(/"/g, '""')}"`;
-      }).join("\n");
-
-  const encodedUri = encodeURI(csvContent);
-  const link = document.createElement("a");
-  link.setAttribute("href", encodedUri);
-  link.setAttribute("download", `solved-tickets-${new Date().toISOString().split('T')[0]}.csv`);
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-
-  if(typeof alertBox === "function") {
-    alertBox("✅", "Success!", "Tickets data exported successfully!");
-  }
-});
 
 // Inicialização
 loadTickets();

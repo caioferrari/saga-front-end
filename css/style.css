@@ -2558,3 +2558,64 @@ form.users-search {
   color: rgb(107, 114, 128);
   min-height: 15px;
 }
+
+.solution-section {
+  margin-bottom: 16px;
+}
+
+.solution-category-wrapper {
+  margin-bottom: 12px;
+}
+
+.section-label {
+  font-weight: 600;
+  color: #6B7280;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.section-label-docs {
+  font-weight: 600;
+  color: #6B7280;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.docs-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.doc-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px;
+  color: #1E40AF;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #DBEAFE;
+    border-color: #93C5FD;
+    transform: translateX(2px);
+  }
+
+  .doc-icon {
+    flex-shrink: 0;
+  }
+
+  .doc-text {
+    flex: 1;
+  }
+
+  .doc-arrow {
+    flex-shrink: 0;
+  }
+}

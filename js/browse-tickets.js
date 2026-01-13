@@ -215,24 +215,24 @@ const showDetailsInline = (row, index, btn) => {
         <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">${sol.description}</p>
       </div>
 
-      <div style="margin-bottom: 16px;">
-        <div style="margin-bottom: 12px;">
-          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 4px;">CATEGORY</span>
+      <div class="solution-section">
+        <div class="solution-category-wrapper">
+          <span class="section-label">CATEGORY</span>
           <span class="role-badge role-qa">${sol.category}</span>
         </div>
         ${sol.documentation && sol.documentation.length > 0 ? `
           <div>
-            <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">DOCUMENTATION</span>
-            <div style="display: grid; gap: 8px;">
+            <span class="section-label-docs">DOCUMENTATION</span>
+            <div class="docs-grid">
               ${sol.documentation.map((doc, idx) => `
-                <a href="${doc}" target="_blank" style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 6px; color: #1E40AF; font-size: 13px; text-decoration: none; transition: all 0.2s;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <a href="${doc}" target="_blank" class="doc-link">
+                  <svg class="doc-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
                     <line x1="10" y1="14" x2="21" y2="3"></line>
                   </svg>
-                  <span style="flex: 1;">Documentation ${sol.documentation.length > 1 ? `#${idx + 1}` : ''}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <span class="doc-text">Documentation ${sol.documentation.length > 1 ? `#${idx + 1}` : ''}</span>
+                  <svg class="doc-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </a>

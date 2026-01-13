@@ -5,6 +5,7 @@ const tableBody = document.querySelector("#ticketsTableBody");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const ticketSearch = document.querySelector("#ticketSearch");
 
+// 1. Carregamento inicial
 const loadTickets = () => {
   fetch(casesData)
     .then(response => {
@@ -22,14 +23,17 @@ const loadTickets = () => {
     });
 };
 
+// 2. Atualizar estatísticas
 const updateStats = () => {
   const totalTickets = allTickets.length;
   const smeTickets = allTickets.filter(t => t.overhead === "SME").length;
 
   const waitTimes = allTickets.map(t => {
-    const time = t.waitingTime;
-    if (time.includes('h+')) return 60;
-    return parseInt(time) || 0;
+    const raised = new Date(t.timeRaised);
+    const closed = new Date(t.timeClosed);
+    const diffMs = closed - raised;
+    const diffMins = Math.floor(diffMs / (1000 * 60));
+    return diffMins;
   });
 
   const avgWaitTime = waitTimes.length > 0
@@ -41,6 +45,7 @@ const updateStats = () => {
   document.querySelector("#smeTickets").textContent = smeTickets;
 };
 
+// 3. Filtro Mestre (Busca e Botões)
 const applyFilters = () => {
   const searchTerm = ticketSearch.value.toLowerCase().trim();
   const activeBtn = document.querySelector(".filter-btn.active");
@@ -61,6 +66,7 @@ const applyFilters = () => {
   renderTable(filteredTickets);
 };
 
+// 4. Listeners
 ticketSearch.addEventListener("input", applyFilters);
 
 filterButtons.forEach(button => {
@@ -71,6 +77,7 @@ filterButtons.forEach(button => {
   });
 });
 
+// 5. Helper Functions
 const getProgramClass = (program) => {
   const classes = {
     'Gold': 'role-sme',
@@ -83,6 +90,20 @@ const getProgramClass = (program) => {
   return classes[program] || 'role-default';
 };
 
+const calculateWaitTime = (timeRaised, timeClosed) => {
+  const raised = new Date(timeRaised);
+  const closed = new Date(timeClosed);
+  const diffMs = closed - raised;
+  const diffMins = Math.floor(diffMs / (1000 * 60));
+
+  if (diffMins >= 60) {
+    const hours = Math.floor(diffMins / 60);
+    return `${hours}h+`;
+  }
+  return `${diffMins}min`;
+};
+
+// 6. Renderização
 const renderTable = (ticketsToDisplay) => {
   tableBody.innerHTML = "";
 
@@ -93,6 +114,7 @@ const renderTable = (ticketsToDisplay) => {
 
   ticketsToDisplay.forEach((ticket, index) => {
     const programClass = getProgramClass(ticket.program);
+    const waitTime = calculateWaitTime(ticket.timeRaised, ticket.timeClosed);
 
     tableBody.innerHTML += `
       <tr data-index="${index}">
@@ -110,7 +132,7 @@ const renderTable = (ticketsToDisplay) => {
           <span style="font-size: 13px; color: #374151; font-weight: 500;">@${ticket.helper}</span>
         </td>
         <td>
-          <span style="font-size: 13px; color: #6B7280;">${ticket.waitingTime}</span>
+          <span style="font-size: 13px; color: #6B7280;">${waitTime}</span>
         </td>
         <td>
           <div class="action-buttons">
@@ -128,6 +150,7 @@ const renderTable = (ticketsToDisplay) => {
   attachEventListeners();
 };
 
+// 7. Visualização de Detalhes
 const closeAllViews = () => {
   const existingView = document.querySelector(".view-row-active");
   if (existingView) {
@@ -143,6 +166,17 @@ const closeAllViews = () => {
   });
 };
 
+const formatDate = (dateStr) => {
+  const date = new Date(dateStr);
+  return date.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
+
 const showDetailsInline = (row, index, btn) => {
   if (btn.classList.contains("active-viewing")) {
     closeAllViews();
@@ -155,20 +189,8 @@ const showDetailsInline = (row, index, btn) => {
   btn.classList.add("active-viewing");
 
   const ticket = allTickets[index];
-
   const viewRow = document.createElement("tr");
   viewRow.classList.add("view-row-active");
-
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return date.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
 
   const addonsHTML = ticket.addons.map(addon => `
     <div style="background: #F9FAFB; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
@@ -181,6 +203,57 @@ const showDetailsInline = (row, index, btn) => {
       </div>
     </div>
   `).join('');
+
+  const solutionHTML = ticket.solution && ticket.solution.length > 0 ? ticket.solution.map(sol => `
+    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #10B981; margin-bottom: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h5 style="margin: 0; font-size: 15px; color: #1F2937; font-weight: 600;">Solution Details</h5>
+        <span class="status-badge" style="background: #D1FAE5; color: #065F46; border-radius: 12px; padding: 4px 12px; font-size: 12px;">${sol.status}</span>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">${sol.description}</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+        <div>
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 4px;">CATEGORY</span>
+          <span class="role-badge role-qa">${sol.category}</span>
+        </div>
+        <div>
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 4px;">DOCUMENTATION</span>
+          <a href="${sol.documentation}" target="_blank" style="color: #3B82F6; font-size: 13px; text-decoration: none;">View Documentation →</a>
+        </div>
+      </div>
+
+      ${sol.tasks && sol.tasks.length > 0 ? `
+        <div style="margin-bottom: 16px;">
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">RELATED TASKS</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            ${sol.tasks.map(task => `<span style="background: #EFF6FF; color: #1E40AF; padding: 4px 10px; border-radius: 6px; font-size: 12px;">${task}</span>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      ${sol.CMS && sol.CMS.length > 0 ? `
+        <div style="margin-bottom: 16px;">
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">CMS PLATFORMS</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            ${sol.CMS.map(cms => `<span style="background: #F3F4F6; color: #374151; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500;">${cms}</span>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      ${sol.code ? `
+        <div>
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">CODE IMPLEMENTATION</span>
+          <pre style="background: #1F2937; color: #F9FAFB; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 12px; line-height: 1.5; margin: 0;"><code>${sol.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
+        </div>
+      ` : ''}
+    </div>
+  `).join('') : '<p style="color: #6B7280; font-style: italic;">No solution details available.</p>';
+
+  const waitTime = calculateWaitTime(ticket.timeRaised, ticket.timeClosed);
 
   viewRow.innerHTML = `
     <td colspan="6">
@@ -212,16 +285,20 @@ const showDetailsInline = (row, index, btn) => {
             <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Timeline</h4>
             <div style="background: white; padding: 16px; border-radius: 6px;">
               <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">OPENED</span>
-                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.firstDate)}</div>
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE RAISED</span>
+                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeRaised)}</div>
               </div>
               <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">SOLVED</span>
-                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.lastDate)}</div>
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE TAKEN</span>
+                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeTaken)}</div>
+              </div>
+              <div style="margin-bottom: 12px;">
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE CLOSED</span>
+                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeClosed)}</div>
               </div>
               <div>
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">WAIT TIME</span>
-                <div style="font-size: 14px; color: #1F2937; margin-top: 4px; font-weight: 600;">${ticket.waitingTime}</div>
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">TOTAL WAIT TIME</span>
+                <div style="font-size: 14px; color: #1F2937; margin-top: 4px; font-weight: 600;">${waitTime}</div>
               </div>
             </div>
           </div>
@@ -234,9 +311,14 @@ const showDetailsInline = (row, index, btn) => {
           </div>
         </div>
 
-        <div>
+        <div style="margin-bottom: 20px;">
           <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Technical Details</h4>
           ${addonsHTML}
+        </div>
+
+        <div>
+          <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Solution Applied</h4>
+          ${solutionHTML}
         </div>
       </div>
     </td>
@@ -245,6 +327,7 @@ const showDetailsInline = (row, index, btn) => {
   row.parentNode.insertBefore(viewRow, row.nextSibling);
 };
 
+// 8. Event Listeners
 const attachEventListeners = () => {
   document.querySelectorAll(".view-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
@@ -256,12 +339,14 @@ const attachEventListeners = () => {
   });
 };
 
+// 9. Export Functionality
 document.querySelector("#exportBtn")?.addEventListener("click", () => {
   const csvContent = "data:text/csv;charset=utf-8,"
-    + "Case ID,Name,LDAP,Program,Helper,Wait Time,Status,Description\n"
-    + allTickets.map(t =>
-        `"${t.caseID}","${t.name}","${t.ldap}","${t.program}","${t.helper}","${t.waitingTime}","${t.status}","${t.description.replace(/"/g, '""')}"`
-      ).join("\n");
+    + "Case ID,Name,LDAP,Program,Helper,Status,Time Raised,Time Taken,Time Closed,Description\n"
+    + allTickets.map(t => {
+        const waitTime = calculateWaitTime(t.timeRaised, t.timeClosed);
+        return `"${t.caseID}","${t.name}","${t.ldap}","${t.program}","${t.helper}","${t.status}","${formatDate(t.timeRaised)}","${formatDate(t.timeTaken)}","${formatDate(t.timeClosed)}","${t.description.replace(/"/g, '""')}"`;
+      }).join("\n");
 
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement("a");
@@ -276,4 +361,5 @@ document.querySelector("#exportBtn")?.addEventListener("click", () => {
   }
 });
 
+// Inicialização
 loadTickets();

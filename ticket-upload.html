@@ -110,61 +110,73 @@
               <input type="text" name="search" placeholder="Saga Quick Consult" />
             </form>
           </div>
-          
+
+          <div class="upload-header">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg>
+              <h1>Raise New Ticket</h1>
+            </div>
+            <p>Submit a new case and connect with SMEs, QAs, Team Leads, or WFMs</p>
+          </div>
+
           <div class="dashboard-grid">
             <div class="dashboard-card new-ticket-card">
-              <div class="card-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><path d="M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg>
-                <h3>Raise New Ticket</h3>
-              </div>
               <div class="new-ticket-fields" id="newTicketFields">
                 <form action="#" class="upload-form" id="ticketForm">
-                  <input type="text" id="caseId" name="caseId" placeholder="Case ID. Ex: 1-1234567890" aria-required="true" aria-errormessage="We need to know your case ID" aria-invalid="false" aria-describedby="caseId-helper" autocomplete="off" />
+                  <input type="text" id="caseId" name="caseId" placeholder="Case ID (Ex: 1-1234567890)" aria-required="true" aria-errormessage="We need to know your case ID" aria-invalid="false" autocomplete="off" />
+
                   <div class="custom-select-container multi-select" data-source="topics.taskType">
                     <input type="hidden" name="caseType" class="hidden-tasks-input" aria-required="true" aria-errormessage="Inform the type of your case's task" />
                     <div class="select-trigger">
                       <div class="selected-tags">
-                        <input type="text" class="task-input" name="caseType" placeholder="Case Type" data-placeholder="Case Type" autocomplete="off" />
+                        <input type="text" class="task-input" placeholder="Case Type" data-placeholder="Case Type" autocomplete="off" />
                       </div>
                     </div>
                     <ul class="select-options"></ul>
                   </div>
-                  <div class="custom-select-container single-select" data-source="topics.programLevel">
+
+                  <div class="custom-select-container multi-select" data-source="topics.programLevel">
                     <input type="hidden" name="programLevel" class="hidden-tasks-input" aria-required="true" aria-errormessage="We need to know the priority. Inform the program level of your case." />
                     <div class="select-trigger">
                       <div class="selected-tags">
-                        <input type="text" class="task-input" name="programLevel" placeholder="Program Level" data-placeholder="Program Level" autocomplete="off" />
+                        <input type="text" class="task-input" placeholder="Program Level" data-placeholder="Program Level" autocomplete="off" />
                       </div>
                     </div>
                     <ul class="select-options"></ul>
                   </div>
+
                   <div class="custom-select-container single-select" data-source="topics.teams">
-                    <input type="hidden" name="teams" class="hidden-tasks-input" aria-required="true" aria-errormessage="What team is this ticket destinated?" />
+                    <input type="hidden" name="team" class="hidden-tasks-input" aria-required="true" aria-errormessage="What team is this ticket destinated?" />
                     <div class="select-trigger">
                       <div class="selected-tags">
-                        <input type="text" class="task-input" name="teams" placeholder="Team" data-placeholder="Team" autocomplete="off" />
+                        <input type="text" class="task-input" placeholder="Team" data-placeholder="Team" autocomplete="off" />
                       </div>
                     </div>
                     <ul class="select-options"></ul>
                   </div>
-                  <input type="text" name="websiteURL" placeholder="Website URL" aria-required="false" aria-invalid="false" autocomplete="off" />
+
+                  <input type="text" name="site" placeholder="Site (Optional)" aria-required="false" aria-errormessage="Please enter a valid website URL" aria-invalid="false" autocomplete="off" />
+
                   <div class="google-products">
-                    <input type="text" name="googleProductsCID" placeholder="CID or Ext. CID" aria-required="false" autocomplete="off" />
-                    <input type="text" name="googleProductsGA4" placeholder="GA4" aria-required="false" autocomplete="off" />
-                    <input type="text" name="googleProductsGTM" placeholder="GTM" aria-required="false" autocomplete="off" />
-                    <input type="text" name="googleProductsMCID" placeholder="MCID" aria-required="false" autocomplete="off" />
+                    <input type="text" name="cid" placeholder="CID or Ext" aria-required="false" autocomplete="off" />
+                    <input type="text" name="ga4" placeholder="GA4" aria-required="false" aria-errormessage="GA4 ID must start with G- followed by alphanumeric characters" autocomplete="off" />
+                    <input type="text" name="gtm" placeholder="GTM" aria-required="false" aria-errormessage="GTM ID must start with GTM- followed by alphanumeric characters" autocomplete="off" />
+                    <input type="text" name="mcid" placeholder="MCID" aria-required="false" autocomplete="off" />
                   </div>
+
                   <div class="checkbox-group">
                     <div>Are you on call?</div>
                     <div>
-                      <label for="onCall">Yes</label>
-                      <input type="radio" id="onCall" name="OnCall" aria-required="true" aria-errormessage="Let us know if are on call." />
-                      <label for="notOnCall">No</label>
-                      <input type="radio" id="notOnCall" name="OnCall" />
+                      <label for="onCallYes">Yes</label>
+                      <input type="radio" id="onCallYes" name="onCall" value="yes" aria-required="true" aria-errormessage="Let us know if you are on call." />
+                      <label for="onCallNo">No</label>
+                      <input type="radio" id="onCallNo" name="onCall" value="no" />
                     </div>
                   </div>
+
                   <textarea id="problemDescription" name="problemDescription" placeholder="Describe the problem in detail..." aria-required="true" aria-errormessage="We'd like to know more about your ticket. Please add details."></textarea>
-                  <button type="submit" class="btn btn-primary" title="OK">Submit Ticket</button>
+
+                  <button type="submit" class="btn btn-primary" title="Submit">Submit Ticket</button>
                 </form>
                 <div class="success"></div>
               </div>
@@ -176,5 +188,6 @@
   </main>
   <script src="js/main.js"></script>
   <script src="js/formValidation.js"></script>
+  <script src="js/validation.js"></script>
 </body>
 </html>

@@ -26,23 +26,33 @@ const loadTickets = () => {
 // 2. Atualizar estatísticas
 const updateStats = () => {
   const totalTickets = allTickets.length;
-  const smeTickets = allTickets.filter(t => t.overhead === "SME").length;
 
-  const waitTimes = allTickets.map(t => {
-    const raised = new Date(t.timeRaised);
-    const closed = new Date(t.timeClosed);
-    const diffMs = closed - raised;
-    const diffMins = Math.floor(diffMs / (1000 * 60));
-    return diffMins;
+  const programs = ['Gold', 'Silver', 'Bronze', 'Live Meet', 'Titanium', 'Platinum', 'DSAT'];
+  const programCounts = {};
+
+  programs.forEach(program => {
+    programCounts[program] = allTickets.filter(t => t.program === program).length;
   });
 
-  const avgWaitTime = waitTimes.length > 0
-    ? Math.round(waitTimes.reduce((a, b) => a + b, 0) / waitTimes.length)
-    : 0;
-
   document.querySelector("#totalTickets").textContent = totalTickets;
-  document.querySelector("#avgWaitTime").textContent = avgWaitTime + "min";
-  document.querySelector("#smeTickets").textContent = smeTickets;
+
+  document.querySelector("#goldCount").textContent = programCounts['Gold'];
+  document.querySelector("#silverCount").textContent = programCounts['Silver'];
+  document.querySelector("#bronzeCount").textContent = programCounts['Bronze'];
+  document.querySelector("#liveMeetCount").textContent = programCounts['Live Meet'];
+  document.querySelector("#titaniumCount").textContent = programCounts['Titanium'];
+  document.querySelector("#platinumCount").textContent = programCounts['Platinum'];
+  document.querySelector("#dsatCount").textContent = programCounts['DSAT'];
+
+  const maxCount = Math.max(...Object.values(programCounts), 1);
+
+  document.querySelector("#goldBar").style.width = `${(programCounts['Gold'] / maxCount) * 100}%`;
+  document.querySelector("#silverBar").style.width = `${(programCounts['Silver'] / maxCount) * 100}%`;
+  document.querySelector("#bronzeBar").style.width = `${(programCounts['Bronze'] / maxCount) * 100}%`;
+  document.querySelector("#liveMeetBar").style.width = `${(programCounts['Live Meet'] / maxCount) * 100}%`;
+  document.querySelector("#titaniumBar").style.width = `${(programCounts['Titanium'] / maxCount) * 100}%`;
+  document.querySelector("#platinumBar").style.width = `${(programCounts['Platinum'] / maxCount) * 100}%`;
+  document.querySelector("#dsatBar").style.width = `${(programCounts['DSAT'] / maxCount) * 100}%`;
 };
 
 // 3. Filtro Mestre (Busca e Botões)

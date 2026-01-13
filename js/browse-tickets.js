@@ -4,6 +4,7 @@ let allTickets = [];
 const tableBody = document.querySelector("#ticketsTableBody");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const ticketSearch = document.querySelector("#ticketSearch");
+const sagaQuickSearch = document.querySelector("#sagaQuickSearch");
 
 // 1. Carregamento inicial
 const loadTickets = () => {
@@ -57,7 +58,10 @@ const updateStats = () => {
 
 // 3. Filtro Mestre (Busca e Botões)
 const applyFilters = () => {
-  const searchTerm = ticketSearch.value.toLowerCase().trim();
+  const sagaSearchTerm = sagaQuickSearch ? sagaQuickSearch.value.toLowerCase().trim() : "";
+  const ticketSearchTerm = ticketSearch ? ticketSearch.value.toLowerCase().trim() : "";
+  const searchTerm = sagaSearchTerm || ticketSearchTerm;
+
   const activeBtn = document.querySelector(".filter-btn.active");
   const programFilter = activeBtn ? activeBtn.getAttribute("data-filter") : "all";
 
@@ -77,7 +81,23 @@ const applyFilters = () => {
 };
 
 // 4. Listeners
-ticketSearch.addEventListener("input", applyFilters);
+if (ticketSearch) {
+  ticketSearch.addEventListener("input", () => {
+    if (sagaQuickSearch && ticketSearch.value) {
+      sagaQuickSearch.value = "";
+    }
+    applyFilters();
+  });
+}
+
+if (sagaQuickSearch) {
+  sagaQuickSearch.addEventListener("input", () => {
+    if (ticketSearch && sagaQuickSearch.value) {
+      ticketSearch.value = "";
+    }
+    applyFilters();
+  });
+}
 
 filterButtons.forEach(button => {
   button.addEventListener("click", () => {

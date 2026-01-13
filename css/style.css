@@ -2213,41 +2213,6 @@ form#queueFormClose {
         @media screen and (max-width: 768px) {
           padding: 12px 8px;
         }
-
-        .live-meet {
-          background: #D1FAE5;
-          color: #065F46;
-        }
-    
-        .titanium {
-          background: #000000;
-          color: #828700
-        }
-    
-        .platinum {
-          background: #494944;
-          color: #abaca5;
-        }
-    
-        .gold {
-          background: #eaff00;
-          color: #838700;
-        }
-    
-        .silver {
-          background: #abaca5;
-          color: #494944;
-        }
-    
-        .bronze {
-          background: #d7a65c;
-          color: #5d4700;
-        }
-    
-        .qa {
-          background: #ffa686;
-          color: #95614e;
-        }
       }
 
       .loading,
@@ -2594,68 +2559,63 @@ form.users-search {
   min-height: 15px;
 }
 
-.view-row-active {
-  background: linear-gradient(135deg, #EFF6FF 0%, #E0F2FE 100%);
-  border-left: 4px solid #2A7B9B;
-  animation: slideDown 0.3s ease-out;
-
-  td {
-    padding: 20px !important;
-    border-top: 2px solid #BFDBFE;
-    border-bottom: 2px solid #BFDBFE;
-  }
-
-  .addon-container {
-    margin: 10px 0;
-    padding: 15px;
-    background: #FFF;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-
-  .addon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    font-size: 13px;
-    color: #1F2937;
-
-    strong {
-      color: #2A7B9B;
-      font-weight: 600;
-    }
-  }
-
-  .addon-full-width {
-    grid-column: 1 / -1;
-  }
-
-  .addon-link {
-    color: #2563EB;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .addon-code {
-    font-family: 'Courier New', monospace;
-    background: #F3F4F6;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 12px;
-    color: #1F2937;
-  }
+.solution-section {
+  margin-bottom: 16px;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+.solution-category-wrapper {
+  margin-bottom: 12px;
+}
+
+.section-label {
+  font-weight: 600;
+  color: #6B7280;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.section-label-docs {
+  font-weight: 600;
+  color: #6B7280;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.docs-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.doc-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px;
+  color: #1E40AF;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #DBEAFE;
+    border-color: #93C5FD;
+    transform: translateX(2px);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .doc-icon {
+    flex-shrink: 0;
+  }
+
+  .doc-text {
+    flex: 1;
+  }
+
+  .doc-arrow {
+    flex-shrink: 0;
   }
 }

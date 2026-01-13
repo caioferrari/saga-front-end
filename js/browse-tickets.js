@@ -4,7 +4,6 @@ let allTickets = [];
 const tableBody = document.querySelector("#ticketsTableBody");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const ticketSearch = document.querySelector("#ticketSearch");
-const sagaQuickSearch = document.querySelector("#sagaQuickSearch");
 
 // 1. Carregamento inicial
 const loadTickets = () => {
@@ -27,41 +26,28 @@ const loadTickets = () => {
 // 2. Atualizar estatísticas
 const updateStats = () => {
   const totalTickets = allTickets.length;
+  const smeTickets = allTickets.filter(t => t.overhead === "SME").length;
 
-  const programs = ['Gold', 'Silver', 'Bronze', 'Live Meet', 'Titanium', 'Platinum', 'DSAT'];
-  const programCounts = {};
-
-  programs.forEach(program => {
-    programCounts[program] = allTickets.filter(t => t.program === program).length;
+  const waitTimes = allTickets.map(t => {
+    const raised = new Date(t.timeRaised);
+    const closed = new Date(t.timeClosed);
+    const diffMs = closed - raised;
+    const diffMins = Math.floor(diffMs / (1000 * 60));
+    return diffMins;
   });
 
+  const avgWaitTime = waitTimes.length > 0
+    ? Math.round(waitTimes.reduce((a, b) => a + b, 0) / waitTimes.length)
+    : 0;
+
   document.querySelector("#totalTickets").textContent = totalTickets;
-
-  document.querySelector("#goldCount").textContent = programCounts['Gold'];
-  document.querySelector("#silverCount").textContent = programCounts['Silver'];
-  document.querySelector("#bronzeCount").textContent = programCounts['Bronze'];
-  document.querySelector("#liveMeetCount").textContent = programCounts['Live Meet'];
-  document.querySelector("#titaniumCount").textContent = programCounts['Titanium'];
-  document.querySelector("#platinumCount").textContent = programCounts['Platinum'];
-  document.querySelector("#dsatCount").textContent = programCounts['DSAT'];
-
-  const maxCount = Math.max(...Object.values(programCounts), 1);
-
-  document.querySelector("#goldBar").style.width = `${(programCounts['Gold'] / maxCount) * 100}%`;
-  document.querySelector("#silverBar").style.width = `${(programCounts['Silver'] / maxCount) * 100}%`;
-  document.querySelector("#bronzeBar").style.width = `${(programCounts['Bronze'] / maxCount) * 100}%`;
-  document.querySelector("#liveMeetBar").style.width = `${(programCounts['Live Meet'] / maxCount) * 100}%`;
-  document.querySelector("#titaniumBar").style.width = `${(programCounts['Titanium'] / maxCount) * 100}%`;
-  document.querySelector("#platinumBar").style.width = `${(programCounts['Platinum'] / maxCount) * 100}%`;
-  document.querySelector("#dsatBar").style.width = `${(programCounts['DSAT'] / maxCount) * 100}%`;
+  document.querySelector("#avgWaitTime").textContent = avgWaitTime + "min";
+  document.querySelector("#smeTickets").textContent = smeTickets;
 };
 
 // 3. Filtro Mestre (Busca e Botões)
 const applyFilters = () => {
-  const sagaSearchTerm = sagaQuickSearch ? sagaQuickSearch.value.toLowerCase().trim() : "";
-  const ticketSearchTerm = ticketSearch ? ticketSearch.value.toLowerCase().trim() : "";
-  const searchTerm = sagaSearchTerm || ticketSearchTerm;
-
+  const searchTerm = ticketSearch.value.toLowerCase().trim();
   const activeBtn = document.querySelector(".filter-btn.active");
   const programFilter = activeBtn ? activeBtn.getAttribute("data-filter") : "all";
 
@@ -81,23 +67,7 @@ const applyFilters = () => {
 };
 
 // 4. Listeners
-if (ticketSearch) {
-  ticketSearch.addEventListener("input", () => {
-    if (sagaQuickSearch && ticketSearch.value) {
-      sagaQuickSearch.value = "";
-    }
-    applyFilters();
-  });
-}
-
-if (sagaQuickSearch) {
-  sagaQuickSearch.addEventListener("input", () => {
-    if (ticketSearch && sagaQuickSearch.value) {
-      ticketSearch.value = "";
-    }
-    applyFilters();
-  });
-}
+ticketSearch.addEventListener("input", applyFilters);
 
 filterButtons.forEach(button => {
   button.addEventListener("click", () => {
@@ -149,22 +119,20 @@ const renderTable = (ticketsToDisplay) => {
     tableBody.innerHTML += `
       <tr data-index="${index}">
         <td>
-          <code class="table-case-code">${ticket.caseID}</code>
+          <code style="font-size: 12px; background: #F3F4F6; padding: 4px 8px; border-radius: 4px; color: #374151;">${ticket.caseID}</code>
         </td>
         <td>
-          <div class="user-info">
-            <div class="user-details">
-              <span class="user-name">${ticket.name}</span>
-              <span class="user-email">${ticket.ldap}@google.com</span>
-            </div>
+          <div>
+            <div style="font-weight: 600; color: #1F2937; font-size: 14px;">${ticket.name}</div>
+            <div style="font-size: 12px; color: #6B7280;">@${ticket.ldap}</div>
           </div>
         </td>
         <td><span class="role-badge ${programClass}">${ticket.program}</span></td>
         <td>
-          <code class="ldap-code">${ticket.helper}</code>
+          <span style="font-size: 13px; color: #374151; font-weight: 500;">@${ticket.helper}</span>
         </td>
         <td>
-          <span class="table-wait-time">${waitTime}</span>
+          <span style="font-size: 13px; color: #6B7280;">${waitTime}</span>
         </td>
         <td>
           <div class="action-buttons">
@@ -225,26 +193,26 @@ const showDetailsInline = (row, index, btn) => {
   viewRow.classList.add("view-row-active");
 
   const addonsHTML = ticket.addons.map(addon => `
-    <div class="addon-container">
-      <div class="addon-grid">
-        <div><strong>Site:</strong> <a href="${addon.site}" target="_blank" class="addon-link">${addon.site}</a></div>
+    <div style="background: #F9FAFB; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 13px;">
+        <div><strong>Site:</strong> <a href="${addon.site}" target="_blank" style="color: #3B82F6;">${addon.site}</a></div>
         <div><strong>CMS:</strong> ${addon.CMS}</div>
-        <div><strong>CID:</strong> <code class="addon-code">${addon.CID}</code></div>
-        <div><strong>GA4:</strong> <code class="addon-code">${addon.GA4}</code></div>
-        <div class="addon-full-width"><strong>GTM:</strong> <code class="addon-code">${addon.GTM}</code></div>
+        <div><strong>CID:</strong> <code style="background: #E5E7EB; padding: 2px 6px; border-radius: 3px;">${addon.CID}</code></div>
+        <div><strong>GA4:</strong> <code style="background: #E5E7EB; padding: 2px 6px; border-radius: 3px;">${addon.GA4}</code></div>
+        <div style="grid-column: span 2;"><strong>GTM:</strong> <code style="background: #E5E7EB; padding: 2px 6px; border-radius: 3px;">${addon.GTM}</code></div>
       </div>
     </div>
   `).join('');
 
   const solutionHTML = ticket.solution && ticket.solution.length > 0 ? ticket.solution.map(sol => `
-    <div class="solution-container">
-      <div class="solution-header">
-        <h5 class="solution-title">Solution Details</h5>
-        <span class="solution-status-badge">${sol.status}</span>
+    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #10B981; margin-bottom: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h5 style="margin: 0; font-size: 15px; color: #1F2937; font-weight: 600;">Solution Details</h5>
+        <span class="status-badge" style="background: #D1FAE5; color: #065F46; border-radius: 12px; padding: 4px 12px; font-size: 12px;">${sol.status}</span>
       </div>
 
-      <div class="solution-description-section">
-        <p class="solution-description-text">${sol.description}</p>
+      <div style="margin-bottom: 16px;">
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">${sol.description}</p>
       </div>
 
       <div class="solution-section">
@@ -275,97 +243,97 @@ const showDetailsInline = (row, index, btn) => {
       </div>
 
       ${sol.tasks && sol.tasks.length > 0 ? `
-        <div class="tasks-section">
-          <span class="section-label-docs">RELATED TASKS</span>
-          <div class="tasks-container">
-            ${sol.tasks.map(task => `<span class="task-badge">${task}</span>`).join('')}
+        <div style="margin-bottom: 16px;">
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">RELATED TASKS</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            ${sol.tasks.map(task => `<span style="background: #EFF6FF; color: #1E40AF; padding: 4px 10px; border-radius: 6px; font-size: 12px;">${task}</span>`).join('')}
           </div>
         </div>
       ` : ''}
 
       ${sol.CMS && sol.CMS.length > 0 ? `
-        <div class="cms-section">
-          <span class="section-label-docs">CMS PLATFORMS</span>
-          <div class="cms-container">
-            ${sol.CMS.map(cms => `<span class="cms-badge">${cms}</span>`).join('')}
+        <div style="margin-bottom: 16px;">
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">CMS PLATFORMS</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            ${sol.CMS.map(cms => `<span style="background: #F3F4F6; color: #374151; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500;">${cms}</span>`).join('')}
           </div>
         </div>
       ` : ''}
 
       ${sol.code ? `
-        <div class="code-section">
-          <span class="section-label-docs">CODE IMPLEMENTATION</span>
-          <pre class="code-block"><code>${sol.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
+        <div>
+          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">CODE IMPLEMENTATION</span>
+          <pre style="background: #1F2937; color: #F9FAFB; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 12px; line-height: 1.5; margin: 0;"><code>${sol.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
         </div>
       ` : ''}
     </div>
-  `).join('') : '<p class="no-solution-text">No solution details available.</p>';
+  `).join('') : '<p style="color: #6B7280; font-style: italic;">No solution details available.</p>';
 
   const waitTime = calculateWaitTime(ticket.timeRaised, ticket.timeClosed);
 
   viewRow.innerHTML = `
     <td colspan="6">
-      <div class="view-details-container">
-        <div class="view-grid">
+      <div style="background: #F5F5F5; padding: 24px; border-radius: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
           <div>
-            <h4 class="view-section-title">Case Information</h4>
-            <div class="view-info-card">
-              <div class="view-info-item">
-                <span class="view-info-label">CASE ID</span>
-                <div class="view-info-value"><code class="view-code">${ticket.caseID}</code></div>
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Case Information</h4>
+            <div style="background: white; padding: 16px; border-radius: 6px;">
+              <div style="margin-bottom: 12px;">
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE ID</span>
+                <div style="font-size: 14px; color: #1F2937; margin-top: 4px;"><code style="background: #F3F4F6; padding: 4px 8px; border-radius: 4px;">${ticket.caseID}</code></div>
               </div>
-              <div class="view-info-item">
-                <span class="view-info-label">STATUS</span>
-                <div class="view-info-value"><span class="status-badge status-active">${ticket.status}</span></div>
+              <div style="margin-bottom: 12px;">
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">STATUS</span>
+                <div style="margin-top: 4px;"><span class="status-badge status-active">${ticket.status}</span></div>
               </div>
-              <div class="view-info-item">
-                <span class="view-info-label">OVERHEAD</span>
-                <div class="view-info-value"><span class="role-badge role-sme">${ticket.overhead}</span></div>
+              <div style="margin-bottom: 12px;">
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">OVERHEAD</span>
+                <div style="font-size: 14px; color: #1F2937; margin-top: 4px;"><span class="role-badge role-sme">${ticket.overhead}</span></div>
               </div>
-              <div class="view-info-item">
-                <span class="view-info-label">ON CALL</span>
-                <div class="view-info-value">${ticket.onCall ? '✅ Yes' : '❌ No'}</div>
+              <div>
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">ON CALL</span>
+                <div style="font-size: 14px; color: #1F2937; margin-top: 4px;">${ticket.onCall ? '✅ Yes' : '❌ No'}</div>
               </div>
             </div>
           </div>
 
           <div>
-            <h4 class="view-section-title">Timeline</h4>
-            <div class="view-info-card">
-              <div class="view-info-item">
-                <span class="view-info-label">CASE RAISED</span>
-                <div class="view-info-value-sm">${formatDate(ticket.timeRaised)}</div>
+            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Timeline</h4>
+            <div style="background: white; padding: 16px; border-radius: 6px;">
+              <div style="margin-bottom: 12px;">
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE RAISED</span>
+                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeRaised)}</div>
               </div>
-              <div class="view-info-item">
-                <span class="view-info-label">CASE TAKEN</span>
-                <div class="view-info-value-sm">${formatDate(ticket.timeTaken)}</div>
+              <div style="margin-bottom: 12px;">
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE TAKEN</span>
+                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeTaken)}</div>
               </div>
-              <div class="view-info-item">
-                <span class="view-info-label">CASE CLOSED</span>
-                <div class="view-info-value-sm">${formatDate(ticket.timeClosed)}</div>
+              <div style="margin-bottom: 12px;">
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE CLOSED</span>
+                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeClosed)}</div>
               </div>
-              <div class="view-info-item">
-                <span class="view-info-label">TOTAL WAIT TIME</span>
-                <div class="view-info-value-bold">${waitTime}</div>
+              <div>
+                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">TOTAL WAIT TIME</span>
+                <div style="font-size: 14px; color: #1F2937; margin-top: 4px; font-weight: 600;">${waitTime}</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="view-section-full">
-          <h4 class="view-section-title">Description</h4>
-          <div class="view-info-card">
-            <p class="view-description">${ticket.description}</p>
+        <div style="margin-bottom: 20px;">
+          <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Description</h4>
+          <div style="background: white; padding: 16px; border-radius: 6px;">
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">${ticket.description}</p>
           </div>
         </div>
 
-        <div class="view-section-full">
-          <h4 class="view-section-title">Technical Details</h4>
+        <div style="margin-bottom: 20px;">
+          <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Technical Details</h4>
           ${addonsHTML}
         </div>
 
-        <div class="view-section-full">
-          <h4 class="view-section-title">Solution Applied</h4>
+        <div>
+          <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Solution Applied</h4>
           ${solutionHTML}
         </div>
       </div>

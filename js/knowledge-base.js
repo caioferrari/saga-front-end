@@ -200,6 +200,11 @@ const showEditInline = (row, index, btn) => {
   const article = allArticles[index];
   const categories = Array.isArray(article.category) ? article.category : [article.category];
 
+  const categoryOptions = ['Technical', 'Troubleshooting', 'Process', 'Product'];
+  const categoryOptionsHTML = categoryOptions.map(cat =>
+    `<option value="${cat}" ${categories.includes(cat) ? 'selected' : ''}>${cat}</option>`
+  ).join('');
+
   const editRow = document.createElement("tr");
   editRow.classList.add("edit-row-active");
 
@@ -210,7 +215,9 @@ const showEditInline = (row, index, btn) => {
           <input type="text" id="editTitle" value="${article.title}" placeholder="Article Title" style="grid-column: span 2; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px;" />
           <input type="text" id="editQuestion" value="${article.question}" placeholder="Question" style="grid-column: span 2; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px;" />
           <input type="text" id="editAuthor" value="${article.author}" placeholder="Author Name" style="padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px;" />
-          <div id="editCategoryContainer" style="padding: 8px 12px; border: 1px solid #D1D5DB; border-radius: 8px; background: white; min-height: 42px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; cursor: text;"></div>
+          <select id="editCategory" multiple style="padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; min-height: 42px;">
+            ${categoryOptionsHTML}
+          </select>
           <div id="editTagsContainer" style="grid-column: span 2; padding: 8px 12px; border: 1px solid #D1D5DB; border-radius: 8px; background: white; min-height: 42px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; cursor: text;"></div>
         </div>
         <textarea id="editAnswer" placeholder="Answer" style="width: 100%; min-height: 150px; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; font-family: inherit; margin-bottom: 15px;">${article.answer}</textarea>
@@ -221,10 +228,7 @@ const showEditInline = (row, index, btn) => {
 
   row.parentNode.insertBefore(editRow, row.nextSibling);
 
-  let selectedCategories = [...categories];
   let selectedTags = [...article.tags];
-
-  const categoryContainer = document.getElementById('editCategoryContainer');
   const tagsContainer = document.getElementById('editTagsContainer');
 
   const createTagElement = (text, onRemove) => {
@@ -234,38 +238,6 @@ const showEditInline = (row, index, btn) => {
     tag.innerHTML = `${text} <span style="cursor: pointer; font-weight: bold;">&times;</span>`;
     tag.querySelector('span').onclick = onRemove;
     return tag;
-  };
-
-  const renderCategories = () => {
-    categoryContainer.innerHTML = '';
-    selectedCategories.forEach((cat, idx) => {
-      categoryContainer.appendChild(createTagElement(cat, () => {
-        selectedCategories.splice(idx, 1);
-        renderCategories();
-      }));
-    });
-
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.placeholder = selectedCategories.length === 0 ? 'Type category and press Enter' : '';
-    input.style.cssText = 'border: none; outline: none; flex: 1; min-width: 150px; font-size: 14px;';
-
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && input.value.trim()) {
-        e.preventDefault();
-        const val = input.value.trim();
-        if (!selectedCategories.includes(val)) {
-          selectedCategories.push(val);
-          renderCategories();
-        }
-      } else if (e.key === 'Backspace' && input.value === '' && selectedCategories.length > 0) {
-        selectedCategories.pop();
-        renderCategories();
-      }
-    });
-
-    categoryContainer.appendChild(input);
-    categoryContainer.onclick = () => input.focus();
   };
 
   const renderTags = () => {
@@ -301,11 +273,13 @@ const showEditInline = (row, index, btn) => {
     tagsContainer.onclick = () => input.focus();
   };
 
-  renderCategories();
   renderTags();
 
   document.querySelector("#inlineEditForm").onsubmit = function(e) {
     e.preventDefault();
+
+    const categorySelect = document.querySelector("#editCategory");
+    const selectedCategories = Array.from(categorySelect.selectedOptions).map(opt => opt.value);
 
     const updatedArticle = {
       title: document.querySelector("#editTitle").value,

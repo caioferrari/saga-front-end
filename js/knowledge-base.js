@@ -23,13 +23,48 @@ const loadArticles = () => {
 };
 
 const updateStats = () => {
-  const totalArticles = allArticles.length;
-  const technicalArticles = allArticles.filter(a => a.category === "Technical").length;
-  const troubleshootingArticles = allArticles.filter(a => a.category === "Troubleshooting").length;
+  updateCategoriesOverview();
+};
 
-  document.querySelector("#totalArticles").textContent = totalArticles;
-  document.querySelector("#technicalArticles").textContent = technicalArticles;
-  document.querySelector("#troubleshootingArticles").textContent = troubleshootingArticles;
+const updateCategoriesOverview = () => {
+  const categoriesData = {
+    technical: allArticles.filter(a => a.category === "Technical").length,
+    troubleshooting: allArticles.filter(a => a.category === "Troubleshooting").length,
+    process: allArticles.filter(a => a.category === "Process").length,
+    product: allArticles.filter(a => a.category === "Product").length
+  };
+
+  const totalArticles = Object.values(categoriesData).reduce((acc, val) => acc + val, 0);
+
+  if(document.getElementById('totalArticles')) {
+    document.getElementById('totalArticles').textContent = totalArticles;
+  }
+  if(document.getElementById('technicalArticles')) {
+    document.getElementById('technicalArticles').textContent = categoriesData.technical;
+  }
+  if(document.getElementById('troubleshootingArticles')) {
+    document.getElementById('troubleshootingArticles').textContent = categoriesData.troubleshooting;
+  }
+  if(document.getElementById('processArticles')) {
+    document.getElementById('processArticles').textContent = categoriesData.process;
+  }
+  if(document.getElementById('productArticles')) {
+    document.getElementById('productArticles').textContent = categoriesData.product;
+  }
+
+  const updateProgressBar = (barId, value) => {
+    const bar = document.getElementById(barId);
+    if(bar && totalArticles > 0) {
+      const percentage = (value / totalArticles) * 100;
+      bar.style.width = `${percentage}%`;
+      bar.style.transition = 'width 0.5s ease-in-out';
+    }
+  };
+
+  updateProgressBar('technicalBar', categoriesData.technical);
+  updateProgressBar('troubleshootingBar', categoriesData.troubleshooting);
+  updateProgressBar('processBar', categoriesData.process);
+  updateProgressBar('productBar', categoriesData.product);
 };
 
 const applyFilters = () => {
@@ -194,8 +229,8 @@ const showEditInline = (row, index, btn) => {
     }
 
     closeAllEdits();
-    applyFilters();
     updateStats();
+    applyFilters();
   };
 };
 
@@ -233,8 +268,8 @@ const attachEventListeners = () => {
         btnYes.onclick = () => {
           allArticles.splice(index, 1);
 
-          applyFilters();
           updateStats();
+          applyFilters();
 
           document.querySelector("#alert").classList.remove("alert-container");
           document.querySelector("#alert").innerHTML = "";

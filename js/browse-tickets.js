@@ -25,25 +25,6 @@ const loadTickets = () => {
 
 // 2. Atualizar estatísticas
 const updateStats = () => {
-  const totalTickets = allTickets.length;
-  const smeTickets = allTickets.filter(t => t.overhead === "SME").length;
-
-  const waitTimes = allTickets.map(t => {
-    const raised = new Date(t.timeRaised);
-    const closed = new Date(t.timeClosed);
-    const diffMs = closed - raised;
-    const diffMins = Math.floor(diffMs / (1000 * 60));
-    return diffMins;
-  });
-
-  const avgWaitTime = waitTimes.length > 0
-    ? Math.round(waitTimes.reduce((a, b) => a + b, 0) / waitTimes.length)
-    : 0;
-
-  document.querySelector("#totalTickets").textContent = totalTickets;
-  document.querySelector("#avgWaitTime").textContent = avgWaitTime + "min";
-  document.querySelector("#smeTickets").textContent = smeTickets;
-
   updateCasesOverview();
 };
 

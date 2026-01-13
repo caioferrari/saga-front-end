@@ -28,7 +28,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -64,7 +64,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -100,7 +100,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -136,7 +136,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -172,7 +172,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -208,7 +208,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -244,7 +244,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -280,7 +280,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -316,7 +316,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -352,7 +352,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -388,7 +388,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -424,7 +424,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -460,7 +460,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }
@@ -496,7 +496,7 @@
         "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
         "CMS" : ["Wordpress", "WooCommerce"],
         "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
-        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "documentation" : ["https://support.google.com/merchants/contact/suspended", "https://support.google.com/tagmanager/answer/10718549"],
         "category" : "Product Gap",
         "status" : "Solved"
       }

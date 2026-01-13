@@ -86,10 +86,65 @@ const avatar = () => {
 
     const parts = nameText.split(" ");
     const initials = (parts[0][0] + (parts.length > 1 ? parts.pop()[0] : "")).toUpperCase();
-    
+
     if(userAvatars[index]) {
       userAvatars[index].innerHTML = initials;
     }
   });
 }
 avatar();
+
+const updateCasesOverview = () => {
+  const casesData = {
+    gold: 15,
+    silver: 23,
+    bronze: 8,
+    platinum: 12,
+    titanium: 5,
+    dsat: 3
+  };
+
+  const totalCases = Object.values(casesData).reduce((acc, val) => acc + val, 0);
+
+  if(document.getElementById('totalTickets')) {
+    document.getElementById('totalTickets').textContent = totalCases;
+  }
+  if(document.getElementById('goldCases')) {
+    document.getElementById('goldCases').textContent = casesData.gold;
+  }
+  if(document.getElementById('silverCases')) {
+    document.getElementById('silverCases').textContent = casesData.silver;
+  }
+  if(document.getElementById('bronzeCases')) {
+    document.getElementById('bronzeCases').textContent = casesData.bronze;
+  }
+  if(document.getElementById('platinumCases')) {
+    document.getElementById('platinumCases').textContent = casesData.platinum;
+  }
+  if(document.getElementById('titaniumCases')) {
+    document.getElementById('titaniumCases').textContent = casesData.titanium;
+  }
+  if(document.getElementById('dsatCases')) {
+    document.getElementById('dsatCases').textContent = casesData.dsat;
+  }
+
+  const updateProgressBar = (barId, value) => {
+    const bar = document.getElementById(barId);
+    if(bar && totalCases > 0) {
+      const percentage = (value / totalCases) * 100;
+      bar.style.width = `${percentage}%`;
+      bar.style.transition = 'width 0.5s ease-in-out';
+    }
+  };
+
+  updateProgressBar('goldBar', casesData.gold);
+  updateProgressBar('silverBar', casesData.silver);
+  updateProgressBar('bronzeBar', casesData.bronze);
+  updateProgressBar('platinumBar', casesData.platinum);
+  updateProgressBar('titaniumBar', casesData.titanium);
+  updateProgressBar('dsatBar', casesData.dsat);
+};
+
+if(window.location.pathname == "/main.html") {
+  updateCasesOverview();
+}

@@ -152,14 +152,16 @@ const renderTable = (ticketsToDisplay) => {
           <code class="table-case-code">${ticket.caseID}</code>
         </td>
         <td>
-          <div>
-            <div class="table-user-name">${ticket.name}</div>
-            <div class="table-user-ldap">@${ticket.ldap}</div>
+          <div class="user-info">
+            <div class="user-details">
+              <span class="user-name">${ticket.name}</span>
+              <span class="user-email">${ticket.ldap}@google.com</span>
+            </div>
           </div>
         </td>
         <td><span class="role-badge ${programClass}">${ticket.program}</span></td>
         <td>
-          <span class="table-helper-text">@${ticket.helper}</span>
+          <code class="ldap-code">${ticket.helper}</code>
         </td>
         <td>
           <span class="table-wait-time">${waitTime}</span>

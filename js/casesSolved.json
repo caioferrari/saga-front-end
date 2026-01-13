@@ -7,7 +7,6 @@
     "program": "Gold",
     "onCall": true,
     "status": "Solved",
-    "waitingTime": "30min",
     "description": "Tag de Whatsapp com status 'still running' ao testar o disparo. Nós ajustamos a global do GTM no CMS e limpamos cache, testamos com e sem GCLID após também limpar os cookies no navegador, mas o disparo permanece com problema, inclusive ao validar via devtools. O que podemos fazer neste caso? Muito obrigado! CID 6051013270 website https://ferreiraviana.adv.br/ CMS WordPress GTM-TKFCP7RP",
     "addons": [
       {
@@ -18,10 +17,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -42,10 +53,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -66,10 +89,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -90,10 +125,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -114,10 +161,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -138,10 +197,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -162,10 +233,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -186,10 +269,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -210,10 +305,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "8-5717000039978",
@@ -234,10 +341,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "cferrari"
+    "helper" : "cferrari",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "5-1761000040347",
@@ -258,10 +377,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "sousaw"
+    "helper" : "sousaw",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -282,10 +413,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "ricardogi"
+    "helper" : "ricardogi",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "6-8909000040070",
@@ -306,10 +449,22 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "kmelo"
+    "helper" : "kmelo",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   },
   {
     "caseID": "5-1761000040347",
@@ -330,9 +485,21 @@
         "GTM": "GTM-TKFCP7RP"
       }
     ],
-    "firstDate" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
-    "lastDate" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
+    "timeRaised" : "Sat Jan 8 2026 11:00:11 GMT-0300 (Brasilia Standard Time)",
+    "timeTaken" : "Sat Jan 8 2026 11:30:11 GMT-0300 (Brasilia Standard Time)",
+    "timeClosed" : "Sat Jan 8 2026 11:42:22 GMT-0300 (Brasilia Standard Time)",
     "overhead" : "SME",
-    "helper" : "kmelo"
+    "helper" : "kmelo",
+    "solution" : [
+      {
+        "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis mattis sem, nec posuere augue convallis id. Nullam aliquam, neque auctor elementum blandit, sapien nulla pharetra felis, at tristique lorem leo non sem. Pellentesque pharetra nulla neque, eget finibus ipsum porttitor luctus. ",
+        "tasks" : ["Ads Conversion Tracking", "Enhanced Conversion", "Shopping Feed Optimization"],
+        "CMS" : ["Wordpress", "WooCommerce"],
+        "code": "<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    console.log(\"DOM is ready for action\");\n    document.addEventListener(\"click\", function(e) {\n      if(e.target.closest(\"a[href*='wa.me']\")) {\n        console.log(\"Sending...\");\n        gtag(\"event\", \"whatsapp\")\n      }\n    });\n  });\n</script>",
+        "documentation" : "https://support.google.com/tagmanager/answer/10718549",
+        "category" : "Product Gap",
+        "status" : "Solved"
+      }
+    ]
   }
 ]

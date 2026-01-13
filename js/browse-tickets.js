@@ -5,7 +5,7 @@ const tableBody = document.querySelector("#ticketsTableBody");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const ticketSearch = document.querySelector("#ticketSearch");
 
-// 1. Carregamento inicial
+// 1. Carregamento inicialxq
 const loadTickets = () => {
   fetch(casesData)
     .then(response => {

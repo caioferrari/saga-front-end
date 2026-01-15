@@ -87,8 +87,12 @@ const renderTable = (usersToDisplay) => {
 
   usersToDisplay.forEach(user => {
     const roleClasses = { 
-      'SME': 'role-sme', 'QA': 'role-qa', 'Agent': 'role-agent', 
-      'TL': 'role-tl', 'WFM': 'role-wfm' 
+      'SME': 'role-sme',
+      'QA': 'role-qa',
+      'Agent': 'role-agent', 
+      'TL': 'role-tl',
+      'WFM': 'role-wfm',
+      'TM': 'role-tm'
     };
     
     const roleClass = roleClasses[user.role] || "role-default";

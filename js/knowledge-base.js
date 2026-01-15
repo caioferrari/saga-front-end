@@ -5,6 +5,7 @@ const tableBody = document.querySelector("#articlesTableBody");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const articleSearch = document.querySelector("#articleSearch");
 
+// 1. Carregamento inicial
 const loadArticles = () => {
   fetch(knowledgeBaseData)
     .then(response => {
@@ -22,52 +23,35 @@ const loadArticles = () => {
     });
 };
 
+// 2. Estatísticas
 const updateStats = () => {
-  updateCategoriesOverview();
-};
-
-const updateCategoriesOverview = () => {
-  const categoriesData = {
-    technical: 0,
-    troubleshooting: 0,
-    process: 0,
-    product: 0
-  };
+  const categoriesData = { technical: 0, troubleshooting: 0, process: 0, product: 0 };
 
   allArticles.forEach(article => {
     const categories = Array.isArray(article.category) ? article.category : [article.category];
     categories.forEach(cat => {
       const catLower = cat.toLowerCase();
-      if (catLower === "technical") categoriesData.technical++;
-      if (catLower === "troubleshooting") categoriesData.troubleshooting++;
-      if (catLower === "process") categoriesData.process++;
-      if (catLower === "product") categoriesData.product++;
+      if (categoriesData.hasOwnProperty(catLower)) categoriesData[catLower]++;
     });
   });
 
   const totalArticles = Object.values(categoriesData).reduce((acc, val) => acc + val, 0);
 
-  if(document.getElementById('totalArticles')) {
-    document.getElementById('totalArticles').textContent = totalArticles;
-  }
-  if(document.getElementById('technicalArticles')) {
-    document.getElementById('technicalArticles').textContent = categoriesData.technical;
-  }
-  if(document.getElementById('troubleshootingArticles')) {
-    document.getElementById('troubleshootingArticles').textContent = categoriesData.troubleshooting;
-  }
-  if(document.getElementById('processArticles')) {
-    document.getElementById('processArticles').textContent = categoriesData.process;
-  }
-  if(document.getElementById('productArticles')) {
-    document.getElementById('productArticles').textContent = categoriesData.product;
-  }
+  const updateEl = (id, val) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = val;
+  };
+
+  updateEl('totalArticles', totalArticles);
+  updateEl('technicalArticles', categoriesData.technical);
+  updateEl('troubleshootingArticles', categoriesData.troubleshooting);
+  updateEl('processArticles', categoriesData.process);
+  updateEl('productArticles', categoriesData.product);
 
   const updateProgressBar = (barId, value) => {
     const bar = document.getElementById(barId);
     if(bar && totalArticles > 0) {
-      const percentage = (value / totalArticles) * 100;
-      bar.style.width = `${percentage}%`;
+      bar.style.width = `${(value / totalArticles) * 100}%`;
       bar.style.transition = 'width 0.5s ease-in-out';
     }
   };
@@ -78,6 +62,7 @@ const updateCategoriesOverview = () => {
   updateProgressBar('productBar', categoriesData.product);
 };
 
+// 3. Filtros
 const applyFilters = () => {
   const searchTerm = articleSearch.value.toLowerCase().trim();
   const activeBtn = document.querySelector(".filter-btn.active");
@@ -99,26 +84,7 @@ const applyFilters = () => {
   renderTable(filteredArticles);
 };
 
-articleSearch.addEventListener("input", applyFilters);
-
-filterButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    filterButtons.forEach(btn => btn.classList.remove("active"));
-    button.classList.add("active");
-    applyFilters();
-  });
-});
-
-const getCategoryClass = (category) => {
-  const classes = {
-    'Technical': 'role-sme',
-    'Troubleshooting': 'role-qa',
-    'Process': 'role-tl',
-    'Product': 'role-agent'
-  };
-  return classes[category] || 'role-default';
-};
-
+// 4. Renderização da Tabela
 const renderTable = (articlesToDisplay) => {
   tableBody.innerHTML = "";
 
@@ -129,31 +95,23 @@ const renderTable = (articlesToDisplay) => {
 
   articlesToDisplay.forEach((article, index) => {
     const categories = Array.isArray(article.category) ? article.category : [article.category];
-    const categoryHTML = categories.map(cat => {
-      const categoryClass = getCategoryClass(cat);
-      return `<span class="role-badge ${categoryClass}">${cat}</span>`;
-    }).join(' ');
+    const categoryHTML = categories.map(cat => `<span class="role-badge ${getCategoryClass(cat)}">${cat}</span>`).join(' ');
 
-    const tagsHTML = article.tags.slice(0, 3).map(tag =>
-      `<span class="tag" style="background: #E0F2FE; color: #0369A1; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px;">${tag}</span>`
-    ).join('');
-
-    const moreTagsCount = article.tags.length > 3 ? `<span style="font-size: 11px; color: #6B7280;">+${article.tags.length - 3}</span>` : '';
+    const tagsHTML = article.tags.slice(0, 3).map(tag => `<span class="tag-badge">${tag}</span>`).join('');
+    const moreTagsCount = article.tags.length > 3 ? `<span class="more-tags">+${article.tags.length - 3}</span>` : '';
 
     tableBody.innerHTML += `
-      <tr data-index="${index}">
+      <tr data-index="${index}" class="kb-table-row">
         <td>
-          <div style="max-width: 350px;">
-            <div style="font-weight: 600; color: #1F2937; margin-bottom: 4px;">${article.title}</div>
-            <div style="font-size: 12px; color: #6B7280; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${article.question}</div>
+          <div class="article-title-cell">
+            <div class="article-title">${article.title}</div>
+            <div class="article-excerpt">${article.question}</div>
           </div>
         </td>
-        <td>
-          <span style="font-size: 13px; color: #374151;">${article.author}</span>
-        </td>
+        <td><code class="ldap-code">${article.author}</code></td>
         <td>${categoryHTML}</td>
         <td>
-          <div style="display: flex; flex-wrap: wrap; gap: 4px; align-items: center;">
+          <div class="tags-wrapper">
             ${tagsHTML}
             ${moreTagsCount}
           </div>
@@ -179,18 +137,7 @@ const renderTable = (articlesToDisplay) => {
   attachEventListeners();
 };
 
-const closeAllEdits = () => {
-  const existingForm = document.querySelector(".edit-row-active");
-  if (existingForm) {
-    existingForm.remove();
-  }
-
-  document.querySelectorAll(".edit-btn").forEach(btn => {
-    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
-    btn.classList.remove("active-editing");
-  });
-};
-
+// 5. Edição Inline
 const showEditInline = (row, index, btn) => {
   closeAllEdits();
 
@@ -199,9 +146,7 @@ const showEditInline = (row, index, btn) => {
 
   const article = allArticles[index];
   const categories = Array.isArray(article.category) ? article.category : [article.category];
-
-  const categoryOptions = ['Technical', 'Troubleshooting', 'Process', 'Product'];
-  const categoryOptionsHTML = categoryOptions.map(cat =>
+  const categoryOptionsHTML = ['Technical', 'Troubleshooting', 'Process', 'Product'].map(cat =>
     `<option value="${cat}" ${categories.includes(cat) ? 'selected' : ''}>${cat}</option>`
   ).join('');
 
@@ -210,150 +155,126 @@ const showEditInline = (row, index, btn) => {
 
   editRow.innerHTML = `
     <td colspan="5">
-      <form id="inlineEditForm" style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-          <input type="text" id="editTitle" value="${article.title}" placeholder="Article Title" style="grid-column: span 2; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px;" />
-          <input type="text" id="editQuestion" value="${article.question}" placeholder="Question" style="grid-column: span 2; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px;" />
-          <input type="text" id="editAuthor" value="${article.author}" placeholder="Author Name" style="padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px;" />
-          <select id="editCategory" multiple style="padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; min-height: 42px;">
-            ${categoryOptionsHTML}
-          </select>
-          <div id="editTagsContainer" style="grid-column: span 2; padding: 8px 12px; border: 1px solid #D1D5DB; border-radius: 8px; background: white; min-height: 42px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; cursor: text;"></div>
+      <form id="inlineEditForm" class="edit-form-container">
+        <div class="edit-grid">
+          <input type="text" id="editTitle" value="${article.title}" placeholder="Article Title" class="full-width" />
+          <input type="text" id="editQuestion" value="${article.question}" placeholder="Question" class="full-width" />
+          <input type="text" id="editAuthor" value="${article.author}" placeholder="Author Name" />
+          <select id="editCategory" multiple>${categoryOptionsHTML}</select>
+          <div id="editTagsContainer" class="edit-tags-box"></div>
+          <textarea id="editAnswer" class="full-width-textarea" placeholder="Answer">${article.answer}</textarea>
         </div>
-        <textarea id="editAnswer" placeholder="Answer" style="width: 100%; min-height: 150px; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; font-family: inherit; margin-bottom: 15px;">${article.answer}</textarea>
-        <button type="submit" class="btn-primary" style="padding: 10px 20px; background: #3B82F6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Update Article</button>
+        <button type="submit" class="update-btn">Update Article</button>
       </form>
     </td>
   `;
 
   row.parentNode.insertBefore(editRow, row.nextSibling);
 
+  // Lógica de Tags Interativa
   let selectedTags = [...article.tags];
   const tagsContainer = document.getElementById('editTagsContainer');
-
-  const createTagElement = (text, onRemove) => {
-    const tag = document.createElement('span');
-    tag.className = 'tag';
-    tag.style.cssText = 'background: #E0F2FE; color: #0369A1; padding: 4px 10px; border-radius: 4px; font-size: 13px; display: flex; align-items: center; gap: 6px;';
-    tag.innerHTML = `${text} <span style="cursor: pointer; font-weight: bold;">&times;</span>`;
-    tag.querySelector('span').onclick = onRemove;
-    return tag;
-  };
 
   const renderTags = () => {
     tagsContainer.innerHTML = '';
     selectedTags.forEach((tag, idx) => {
-      tagsContainer.appendChild(createTagElement(tag, () => {
-        selectedTags.splice(idx, 1);
-        renderTags();
-      }));
+      const tagEl = document.createElement('span');
+      tagEl.className = 'interactive-tag';
+      tagEl.innerHTML = `${tag} <span class="remove-tag-btn">&times;</span>`;
+      tagEl.querySelector('.remove-tag-btn').onclick = () => { selectedTags.splice(idx, 1); renderTags(); };
+      tagsContainer.appendChild(tagEl);
     });
 
     const input = document.createElement('input');
     input.type = 'text';
-    input.placeholder = selectedTags.length === 0 ? 'Type tags and press Enter or comma' : '';
-    input.style.cssText = 'border: none; outline: none; flex: 1; min-width: 150px; font-size: 14px;';
-
-    input.addEventListener('keydown', (e) => {
-      const value = input.value.trim();
-      if ((e.key === 'Enter' || e.key === ',') && value) {
+    input.placeholder = selectedTags.length === 0 ? 'Type tags...' : '';
+    input.onkeydown = (e) => {
+      const val = input.value.trim().replace(/,/g, '');
+      if ((e.key === 'Enter' || e.key === ',') && val) {
         e.preventDefault();
-        const cleanValue = value.replace(/,/g, '');
-        if (cleanValue && !selectedTags.includes(cleanValue)) {
-          selectedTags.push(cleanValue);
-          renderTags();
-        }
-      } else if (e.key === 'Backspace' && input.value === '' && selectedTags.length > 0) {
-        selectedTags.pop();
-        renderTags();
+        if (!selectedTags.includes(val)) { selectedTags.push(val); renderTags(); }
+      } else if (e.key === 'Backspace' && !input.value && selectedTags.length) {
+        selectedTags.pop(); renderTags();
       }
-    });
-
+    };
     tagsContainer.appendChild(input);
     tagsContainer.onclick = () => input.focus();
   };
 
   renderTags();
 
-  document.querySelector("#inlineEditForm").onsubmit = function(e) {
+  document.querySelector("#inlineEditForm").onsubmit = (e) => {
     e.preventDefault();
-
-    const categorySelect = document.querySelector("#editCategory");
-    const selectedCategories = Array.from(categorySelect.selectedOptions).map(opt => opt.value);
-
-    const updatedArticle = {
+    const updated = {
+      ...article,
       title: document.querySelector("#editTitle").value,
       question: document.querySelector("#editQuestion").value,
       answer: document.querySelector("#editAnswer").value,
       author: document.querySelector("#editAuthor").value,
-      category: selectedCategories,
+      category: Array.from(document.querySelector("#editCategory").selectedOptions).map(o => o.value),
       tags: selectedTags
     };
-
-    allArticles[index] = updatedArticle;
-
-    if(typeof alertBox === "function") {
-      alertBox("✅", "Success!", `Article <b>${updatedArticle.title}</b> has been updated!`);
-    }
-
-    closeAllEdits();
-    updateStats();
-    applyFilters();
+    allArticles[index] = updated;
+    if(typeof alertBox === "function") alertBox("✅", "Success!", `Article updated!`);
+    closeAllEdits(); updateStats(); applyFilters();
   };
+};
+
+// 6. Helpers e Listeners
+const getCategoryClass = (category) => {
+  const classes = { 'Technical': 'role-sme', 'Troubleshooting': 'role-qa', 'Process': 'role-tl', 'Product': 'role-agent' };
+  return classes[category] || 'role-default';
+};
+
+const closeAllEdits = () => {
+  const existing = document.querySelector(".edit-row-active");
+  if (existing) existing.remove();
+  document.querySelectorAll(".edit-btn").forEach(btn => {
+    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
+    btn.classList.remove("active-editing");
+  });
 };
 
 const attachEventListeners = () => {
   document.querySelectorAll(".edit-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.onclick = (e) => {
       e.stopPropagation();
-      const index = parseInt(btn.getAttribute("data-index"));
       const row = btn.closest("tr");
-
-      if (btn.classList.contains("active-editing")) {
-        closeAllEdits();
-      } else {
-        showEditInline(row, index, btn);
-      }
-    });
+      const index = parseInt(btn.dataset.index);
+      btn.classList.contains("active-editing") ? closeAllEdits() : showEditInline(row, index, btn);
+    };
   });
 
   document.querySelectorAll(".delete-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.onclick = (e) => {
       e.stopPropagation();
-      const index = parseInt(btn.getAttribute("data-index"));
+      const index = parseInt(btn.dataset.index);
       const article = allArticles[index];
-
       if(typeof promptBox === "function") {
-        promptBox(
-          "⚠️",
-          "Warning",
-          `Do you really want to delete the article <b>${article.title}</b>? This action cannot be undone.`
-        );
-
-        const btnYes = document.querySelector("#alert a[title='Yes']");
-        const btnCancel = document.querySelector("#alert a[title='Cancel']");
-
-        btnYes.onclick = () => {
+        promptBox("⚠️", "Warning", `Delete <b>${article.title}</b>?`);
+        document.querySelector("#alert a[title='Yes']").onclick = () => {
           allArticles.splice(index, 1);
-
-          updateStats();
-          applyFilters();
-
+          updateStats(); applyFilters();
           document.querySelector("#alert").classList.remove("alert-container");
           document.querySelector("#alert").innerHTML = "";
-
-          if(typeof alertBox === "function") {
-            alertBox("✅", "Success!", `Article <b>${article.title}</b> has been deleted!`);
-          }
+          if(typeof alertBox === "function") alertBox("✅", "Deleted!", "Article removed.");
         };
-
-        btnCancel.onclick = () => {
+        document.querySelector("#alert a[title='Cancel']").onclick = () => {
           document.querySelector("#alert").classList.remove("alert-container");
           document.querySelector("#alert").innerHTML = "";
         };
       }
-    });
+    };
   });
 };
+
+articleSearch.oninput = applyFilters;
+filterButtons.forEach(btn => {
+  btn.onclick = () => {
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    applyFilters();
+  };
+});
 
 loadArticles();

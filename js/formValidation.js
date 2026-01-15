@@ -216,7 +216,7 @@ const customSelect = () => {
 };
 
 // --- O SEGREDO DO "CLIQUE FORA" ---
-if (!window.selectGlobalEventAdded) {
+if(!window.selectGlobalEventAdded) {
   document.addEventListener('click', () => {
     // Se clicar em qualquer lugar morto da página, fecha tudo
     document.querySelectorAll('.select-options').forEach(list => {
@@ -264,29 +264,46 @@ const loadGlobalConfig = async () => {
 };
 
 // 4. Popula os selects que já estão no HTML (como no ticket-upload.html)
-const populateStaticFields = () => {
+const populateStaticFields = async () => { // Transformada em async
   const data = window.appConfigData;
-  if (!data) return;
-
-  const containers = document.querySelectorAll('.custom-select-container[data-source]');
+  const containers = document.querySelectorAll('.custom-select-container');
   
-  containers.forEach(container => {
+  for (const container of containers) {
     const sourcePath = container.getAttribute('data-source');
     const optionsUl = container.querySelector('.select-options');
+    const hiddenInput = container.querySelector('.hidden-tasks-input');
     
-    // Navega no JSON
-    const list = sourcePath.split('.').reduce((obj, key) => obj?.[key], data);
-    
-    if (list && optionsUl) {
-      // 1. Injeta os dados primeiro
-      optionsUl.innerHTML = generateOptions(list);
-      
-      // 2. Agora que os <li> existem, chamamos a função para este container específico
-      // Vamos ajustar a customSelect para aceitar um container se quisermos, 
-      // mas por enquanto, chamá-la aqui resolve se ela tiver a trava de inicialização.
-      customSelect(); 
+    // Lógica especial para o campo smeList
+    if (hiddenInput && hiddenInput.name === "smeList") {
+        try {
+            const response = await fetch('/js/users.json');
+            const users = await response.json();
+            // Filtra: SME + Active usando Arrow Function
+            const activeSmes = users
+                .filter(({ role, status }) => role === "SME" && status === "active")
+                .map(user => user.fullName);
+            
+            if (optionsUl) {
+                optionsUl.innerHTML = activeSmes.length > 0 
+                    ? generateOptions(activeSmes) 
+                    : `<li style="pointer-events:none; color:gray;">No active SMEs found</li>`;
+                customSelect();
+            }
+        } catch (error) {
+            if (optionsUl) optionsUl.innerHTML = `<li style="pointer-events:none; color:red;">Error loading SMEs</li>`;
+        }
+        continue; // Pula para o próximo container
     }
-  });
+
+    // Lógica original para outros selects (data-source)
+    if (sourcePath && data) {
+      const list = sourcePath.split('.').reduce((obj, key) => obj?.[key], data);
+      if (list && optionsUl) {
+        optionsUl.innerHTML = generateOptions(list);
+        customSelect(); 
+      }
+    }
+  }
 };
 
 // 5. Inicia o processo assim que o arquivo é lido

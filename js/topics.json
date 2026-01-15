@@ -120,6 +120,12 @@
       "QA",
       "TL",
       "WFM"
+    ],
+    "questionCategory" : [
+      "Technical",
+      "Code",
+      "Process",
+      "Troubleshooting"
     ]
   }
 }

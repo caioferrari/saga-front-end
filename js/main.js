@@ -86,7 +86,7 @@ const avatar = () => {
 
     const parts = nameText.split(" ");
     const initials = (parts[0][0] + (parts.length > 1 ? parts.pop()[0] : "")).toUpperCase();
-
+    
     if(userAvatars[index]) {
       userAvatars[index].innerHTML = initials;
     }

@@ -30,6 +30,7 @@ const updateStats = () => {
 
 const updateCasesOverview = () => {
   const casesData = {
+    liveMeet: allTickets.filter(t => t.program === "Live Meet").length,
     gold: allTickets.filter(t => t.program === "Gold").length,
     silver: allTickets.filter(t => t.program === "Silver").length,
     bronze: allTickets.filter(t => t.program === "Bronze").length,
@@ -42,6 +43,9 @@ const updateCasesOverview = () => {
 
   if(document.getElementById('totalCases')) {
     document.getElementById('totalCases').textContent = totalCases;
+  }
+  if(document.getElementById('liveMeetCases')) {
+    document.getElementById('liveMeetCases').textContent = casesData.liveMeet;
   }
   if(document.getElementById('goldCases')) {
     document.getElementById('goldCases').textContent = casesData.gold;
@@ -71,6 +75,7 @@ const updateCasesOverview = () => {
     }
   };
 
+  updateProgressBar('liveMeetBar', casesData.liveMeet);
   updateProgressBar('goldBar', casesData.gold);
   updateProgressBar('silverBar', casesData.silver);
   updateProgressBar('bronzeBar', casesData.bronze);
@@ -114,12 +119,13 @@ filterButtons.forEach(button => {
 // 5. Helper Functions
 const getProgramClass = (program) => {
   const classes = {
-    'Gold': 'role-sme',
-    'Silver': 'role-tl',
-    'Bronze': 'role-qa',
-    'Platinum': 'role-sme',
-    'Titanium': 'role-sme',
-    'Live Meet': 'role-agent'
+    'Gold': 'gold',
+    'Silver': 'silver',
+    'Bronze': 'bronze',
+    'Platinum': 'platinum',
+    'Titanium': 'titanium',
+    'Live Meet': 'live-meet',
+    'DSAT' : 'qa'
   };
   return classes[program] || 'role-default';
 };
@@ -153,20 +159,20 @@ const renderTable = (ticketsToDisplay) => {
     tableBody.innerHTML += `
       <tr data-index="${index}">
         <td>
-          <code style="font-size: 12px; background: #F3F4F6; padding: 4px 8px; border-radius: 4px; color: #374151;">${ticket.caseID}</code>
+          <code class="case-id-tag">${ticket.caseID}</code>
         </td>
         <td>
-          <div>
-            <div style="font-weight: 600; color: #1F2937; font-size: 14px;">${ticket.name}</div>
-            <div style="font-size: 12px; color: #6B7280;">@${ticket.ldap}</div>
+          <div class="agent-col-wrapper">
+            <div class="agent-name-main">${ticket.name}</div>
+            <div class="agent-ldap-sub">@${ticket.ldap}</div>
           </div>
         </td>
-        <td><span class="role-badge ${programClass}">${ticket.program}</span></td>
+        <td><span class="role-badge program-badge ${programClass}">${ticket.program}</span></td>
         <td>
-          <span style="font-size: 13px; color: #374151; font-weight: 500;">@${ticket.helper}</span>
+          <code class="ldap-code">${ticket.helper}</code>
         </td>
         <td>
-          <span style="font-size: 13px; color: #6B7280;">${waitTime}</span>
+          <span class="wait-time-style">${waitTime}</span>
         </td>
         <td>
           <div class="action-buttons">
@@ -227,26 +233,26 @@ const showDetailsInline = (row, index, btn) => {
   viewRow.classList.add("view-row-active");
 
   const addonsHTML = ticket.addons.map(addon => `
-    <div style="background: #F9FAFB; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; font-size: 13px;">
-        <div><strong>Site:</strong> <a href="${addon.site}" target="_blank" style="color: #3B82F6;">${addon.site}</a></div>
+    <div class="addon-container">
+      <div class="addon-inner-grid">
+        <div><strong>Site:</strong> <a href="${addon.site}" target="_blank">${addon.site}</a></div>
         <div><strong>CMS:</strong> ${addon.CMS}</div>
-        <div><strong>CID:</strong> <code style="background: #E5E7EB; padding: 2px 6px; border-radius: 3px;">${addon.CID}</code></div>
-        <div><strong>GA4:</strong> <code style="background: #E5E7EB; padding: 2px 6px; border-radius: 3px;">${addon.GA4}</code></div>
-        <div style="grid-column: span 2;"><strong>GTM:</strong> <code style="background: #E5E7EB; padding: 2px 6px; border-radius: 3px;">${addon.GTM}</code></div>
+        <div><strong>CID:</strong> <code class="case-id-tag" style="background: #E5E7EB; margin: 0; padding: 2px 6px;">${addon.CID}</code></div>
+        <div><strong>GA4:</strong> <code class="case-id-tag" style="background: #E5E7EB; margin: 0; padding: 2px 6px;">${addon.GA4}</code></div>
+        <div style="grid-column: span 2;"><strong>GTM:</strong> <code class="case-id-tag" style="background: #E5E7EB; margin: 0; padding: 2px 6px;">${addon.GTM}</code></div>
       </div>
     </div>
   `).join('');
 
   const solutionHTML = ticket.solution && ticket.solution.length > 0 ? ticket.solution.map(sol => `
-    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #10B981; margin-bottom: 16px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h5 style="margin: 0; font-size: 15px; color: #1F2937; font-weight: 600;">Solution Details</h5>
+    <div class="solution-card-box">
+      <div class="solution-header-flex">
+        <h5>Solution Details</h5>
         <span class="status-badge" style="background: #D1FAE5; color: #065F46; border-radius: 12px; padding: 4px 12px; font-size: 12px;">${sol.status}</span>
       </div>
 
       <div style="margin-bottom: 16px;">
-        <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">${sol.description}</p>
+        <p class="solution-description-text">${sol.description}</p>
       </div>
 
       <div class="solution-section">
@@ -278,7 +284,7 @@ const showDetailsInline = (row, index, btn) => {
 
       ${sol.tasks && sol.tasks.length > 0 ? `
         <div style="margin-bottom: 16px;">
-          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">RELATED TASKS</span>
+          <span class="section-label">RELATED TASKS</span>
           <div style="display: flex; flex-wrap: wrap; gap: 6px;">
             ${sol.tasks.map(task => `<span style="background: #EFF6FF; color: #1E40AF; padding: 4px 10px; border-radius: 6px; font-size: 12px;">${task}</span>`).join('')}
           </div>
@@ -287,7 +293,7 @@ const showDetailsInline = (row, index, btn) => {
 
       ${sol.CMS && sol.CMS.length > 0 ? `
         <div style="margin-bottom: 16px;">
-          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">CMS PLATFORMS</span>
+          <span class="section-label">CMS PLATFORMS</span>
           <div style="display: flex; flex-wrap: wrap; gap: 6px;">
             ${sol.CMS.map(cms => `<span style="background: #F3F4F6; color: #374151; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500;">${cms}</span>`).join('')}
           </div>
@@ -296,8 +302,8 @@ const showDetailsInline = (row, index, btn) => {
 
       ${sol.code ? `
         <div>
-          <span style="font-weight: 600; color: #6B7280; font-size: 12px; display: block; margin-bottom: 8px;">CODE IMPLEMENTATION</span>
-          <pre style="background: #1F2937; color: #F9FAFB; padding: 16px; border-radius: 6px; overflow-x: auto; font-size: 12px; line-height: 1.5; margin: 0;"><code>${sol.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
+          <span class="section-label">CODE IMPLEMENTATION</span>
+          <pre class="solution-code-pre"><code>${sol.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
         </div>
       ` : ''}
     </div>
@@ -307,67 +313,67 @@ const showDetailsInline = (row, index, btn) => {
 
   viewRow.innerHTML = `
     <td colspan="6">
-      <div style="background: #F5F5F5; padding: 24px; border-radius: 8px;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+      <div class="details-wrapper">
+        <div class="details-main-grid">
           <div>
-            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Case Information</h4>
-            <div style="background: white; padding: 16px; border-radius: 6px;">
-              <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE ID</span>
-                <div style="font-size: 14px; color: #1F2937; margin-top: 4px;"><code style="background: #F3F4F6; padding: 4px 8px; border-radius: 4px;">${ticket.caseID}</code></div>
+            <h4 class="details-section-title">Case Information</h4>
+            <div class="details-white-card">
+              <div class="details-field">
+                <span class="field-label">CASE ID</span>
+                <div class="field-value"><code class="case-id-tag">${ticket.caseID}</code></div>
               </div>
-              <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">STATUS</span>
-                <div style="margin-top: 4px;"><span class="status-badge status-active">${ticket.status}</span></div>
+              <div class="details-field">
+                <span class="field-label">STATUS</span>
+                <div class="field-value"><span class="status-badge status-active">${ticket.status}</span></div>
               </div>
-              <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">OVERHEAD</span>
-                <div style="font-size: 14px; color: #1F2937; margin-top: 4px;"><span class="role-badge role-sme">${ticket.overhead}</span></div>
+              <div class="details-field">
+                <span class="field-label">OVERHEAD</span>
+                <div class="field-value"><span class="role-badge role-sme">${ticket.overhead}</span></div>
               </div>
-              <div>
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">ON CALL</span>
-                <div style="font-size: 14px; color: #1F2937; margin-top: 4px;">${ticket.onCall ? '✅ Yes' : '❌ No'}</div>
+              <div class="details-field">
+                <span class="field-label">ON CALL</span>
+                <div class="field-value">${ticket.onCall ? '✅ Yes' : '❌ No'}</div>
               </div>
             </div>
           </div>
 
           <div>
-            <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Timeline</h4>
-            <div style="background: white; padding: 16px; border-radius: 6px;">
-              <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE RAISED</span>
-                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeRaised)}</div>
+            <h4 class="details-section-title">Timeline</h4>
+            <div class="details-white-card">
+              <div class="details-field">
+                <span class="field-label">CASE RAISED</span>
+                <div class="field-value timeline-text">${formatDate(ticket.timeRaised)}</div>
               </div>
-              <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE TAKEN</span>
-                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeTaken)}</div>
+              <div class="details-field">
+                <span class="field-label">CASE TAKEN</span>
+                <div class="field-value timeline-text">${formatDate(ticket.timeTaken)}</div>
               </div>
-              <div style="margin-bottom: 12px;">
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">CASE CLOSED</span>
-                <div style="font-size: 13px; color: #1F2937; margin-top: 4px;">${formatDate(ticket.timeClosed)}</div>
+              <div class="details-field">
+                <span class="field-label">CASE CLOSED</span>
+                <div class="field-value timeline-text">${formatDate(ticket.timeClosed)}</div>
               </div>
-              <div>
-                <span style="font-weight: 600; color: #6B7280; font-size: 12px;">TOTAL WAIT TIME</span>
-                <div style="font-size: 14px; color: #1F2937; margin-top: 4px; font-weight: 600;">${waitTime}</div>
+              <div class="details-field">
+                <span class="field-label">TOTAL WAIT TIME</span>
+                <div class="field-value bold">${waitTime}</div>
               </div>
             </div>
           </div>
         </div>
 
         <div style="margin-bottom: 20px;">
-          <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Description</h4>
-          <div style="background: white; padding: 16px; border-radius: 6px;">
-            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #374151;">${ticket.description}</p>
+          <h4 class="details-section-title">Description</h4>
+          <div class="details-white-card">
+            <p class="solution-description-text">${ticket.description}</p>
           </div>
         </div>
 
         <div style="margin-bottom: 20px;">
-          <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Technical Details</h4>
+          <h4 class="details-section-title">Technical Details</h4>
           ${addonsHTML}
         </div>
 
         <div>
-          <h4 style="margin: 0 0 12px 0; font-size: 16px; color: #1F2937;">Solution Applied</h4>
+          <h4 class="details-section-title">Solution Applied</h4>
           ${solutionHTML}
         </div>
       </div>

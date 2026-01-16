@@ -10,17 +10,20 @@
   <link href='/css/style.css' rel='stylesheet'>
   <style>
     .queue-layout {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 24px;
       padding: 24px;
       min-height: calc(100vh - 100px);
+      height: calc(100vh - 100px);
     }
 
     .queue-section {
-      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 16px;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .queue-section-header {
@@ -31,6 +34,7 @@
       border-radius: 12px;
       backdrop-filter: blur(10px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
     }
 
     .waiting-section .queue-section-header {
@@ -87,6 +91,27 @@
       flex-direction: column;
       gap: 16px;
       padding: 0 4px;
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 12px;
+    }
+
+    .queue-cards-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .queue-cards-container::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .queue-cards-container::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .queue-cards-container::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
     }
 
     .queue-card-isolated {
@@ -319,9 +344,14 @@
       opacity: 0.5;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1400px) {
       .queue-layout {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .queue-section {
+        max-height: 600px;
       }
     }
   </style>

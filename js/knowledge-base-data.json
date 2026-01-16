@@ -1,42 +1,66 @@
 [
   {
-    "title": "Installing Google Tag Manager in Prestashop CMS",
-    "question": "How can I install the Google Tag Manager in the Prestashop CMS?",
-    "answer": "To install Google Tag Manager in Prestashop:\n\n1. Log in to your Prestashop Admin Panel\n2. Go to Modules > Module Manager\n3. Search for \"Google Tag Manager\" in the search bar\n4. Click \"Install\" on the official Google Tag Manager module\n5. After installation, click \"Configure\"\n6. Enter your GTM Container ID (format: GTM-XXXXXX)\n7. You can find your Container ID in your Google Tag Manager account under Admin > Container Settings\n8. Save the configuration\n9. Clear your Prestashop cache: Advanced Parameters > Performance > Clear Cache\n10. Test the installation using Google Tag Assistant Chrome extension\n\nImportant Notes:\n- Make sure you have a Google Tag Manager account and container created before installation\n- The Container ID is different from your Google Analytics tracking ID\n- After installation, you can manage all your tracking tags from the GTM dashboard without touching Prestashop code",
+    "title": "Instalação do Google Tag Manager no CMS PrestaShop",
+    "question": "Como posso instalar o Google Tag Manager no CMS PrestaShop?",
+    "answer": "Para instalar o Google Tag Manager no PrestaShop:\n\n1. Faça login no Painel Administrativo do PrestaShop\n2. Vá em Módulos > Gerenciador de Módulos\n3. Procure por \"Google Tag Manager\" na barra de busca\n4. Clique em \"Instalar\" no módulo oficial do Google Tag Manager\n5. Após a instalação, clique em \"Configurar\"\n6. Insira o seu ID do Contêiner GTM (formato: GTM-XXXXXX)\n7. Você encontra o ID no seu painel do GTM em Administrador > Configurações do Contêiner\n8. Salve a configuração\n9. Limpe o cache do PrestaShop: Parâmetros Avançados > Desempenho > Limpar Cache\n10. Teste a instalação usando a extensão Google Tag Assistant.",
     "category": ["Technical"],
-    "tags": ["Google Tag Manager", "GTM", "Prestashop", "CMS", "Installation", "Tracking"],
-    "author" : "cferrari"
+    "tags": ["Google Tag Manager", "GTM", "Prestashop", "CMS", "Instalação", "Tracking"],
+    "author": "cferrari"
   },
   {
-    "title": "Prestashop Cache Clearing",
-    "question": "How do I clear cache in Prestashop?",
-    "answer": "To clear cache in Prestashop:\n\n1. Log in to your Prestashop Admin Panel\n2. Navigate to Advanced Parameters > Performance\n3. Scroll down to the \"Clear cache\" section\n4. Click the \"Clear cache\" button\n5. Wait for confirmation message\n\nAlternative method via FTP:\n1. Connect to your server via FTP\n2. Navigate to /var/cache folder\n3. Delete all folders inside the cache directory (dev, prod folders)\n4. The cache will automatically regenerate\n\nWhen to clear cache:\n- After installing or updating modules\n- After changing theme settings\n- When changes are not visible on the frontend\n- After modifying configuration settings",
+    "title": "Limpeza de Cache no PrestaShop",
+    "question": "Como faço para limpar o cache no PrestaShop?",
+    "answer": "Para limpar o cache no PrestaShop:\n\n1. No Painel Administrativo, vá em Parâmetros Avançados > Desempenho\n2. Role até a seção \"Limpar cache\"\n3. Clique no botão \"Limpar cache\" no topo da página\n\nMétodo alternativo via FTP:\n1. Conecte-se ao servidor e vá para a pasta /var/cache\n2. Exclua as pastas 'dev' e 'prod'\n\nRecomenda-se limpar o cache após instalar módulos, alterar temas ou quando mudanças no front-end não estiverem visíveis.",
     "category": ["Technical"],
     "tags": ["Prestashop", "Cache", "Performance", "Troubleshooting"],
-    "author" : "cferrari"
+    "author": "cferrari"
   },
   {
-    "title": "Google Analytics 4 Setup",
-    "question": "How do I set up Google Analytics 4?",
-    "answer": "To set up Google Analytics 4 (GA4):\n\n1. Create GA4 Property:\n   - Go to Google Analytics admin panel\n   - Click \"Create Property\"\n   - Fill in property details (name, timezone, currency)\n   - Click \"Next\" and complete setup\n\n2. Get Measurement ID:\n   - In GA4 property, go to Admin > Data Streams\n   - Click on your web stream\n   - Copy the Measurement ID (format: G-XXXXXXXXXX)\n\n3. Install on Website:\n   Option A - Using GTM (Recommended):\n   - Add GA4 Configuration tag in Google Tag Manager\n   - Enter your Measurement ID\n   - Set trigger to \"All Pages\"\n\n   Option B - Direct Installation:\n   - Add GA4 tracking code to your website header\n   - Replace MEASUREMENT_ID with your actual ID\n\n4. Verify Installation:\n   - Go to GA4 Reports > Realtime\n   - Visit your website in another tab\n   - Check if your visit appears in Realtime report\n\nImportant: GA4 is different from Universal Analytics. Make sure you are using the correct Measurement ID format (G-XXXXXXXXXX, not UA-XXXXXXXXXX)",
+    "title": "Configuração do Google Analytics 4 (GA4)",
+    "question": "Como configurar o Google Analytics 4?",
+    "answer": "Para configurar o GA4:\n\n1. Crie a Propriedade GA4 no painel do Google Analytics em Administrador > Criar Propriedade.\n2. Obtenha o ID de Métrica (G-XXXXXXXXXX) em Fluxos de Dados.\n3. Instalação via GTM (Recomendado): Crie uma nova Tag do tipo 'Google Tag', insira o ID de Métrica e configure o acionamento para 'All Pages'.\n4. Verifique a instalação acessando os Relatórios em Tempo Real no GA4 e visitando seu site simultaneamente.",
     "category": ["Technical"],
     "tags": ["Google Analytics", "GA4", "Analytics", "Tracking", "Setup"],
-    "author" : "cferrari"
+    "author": "cferrari"
   },
   {
-    "title": "Creating Custom Events in GTM",
-    "question": "How do I create custom events in Google Tag Manager?",
-    "answer": "To create custom events in Google Tag Manager:\n\n1. Create a Trigger:\n   - In GTM workspace, go to Triggers\n   - Click \"New\"\n   - Choose trigger type (Click, Form Submit, etc.)\n   - Configure trigger conditions\n   - Save the trigger\n\n2. Create a Tag:\n   - Go to Tags section\n   - Click \"New\"\n   - Choose tag type (GA4 Event, Universal Analytics, etc.)\n   - Configure event parameters\n   - Attach the trigger you created\n   - Save the tag\n\n3. Test in Preview Mode:\n   - Click \"Preview\" button\n   - Enter your website URL\n   - Perform the action that should trigger the event\n   - Check if the tag fires in Tag Assistant\n\n4. Publish:\n   - Click \"Submit\" when testing is successful\n   - Add version name and description\n   - Click \"Publish\"\n\nCommon Custom Events:\n- Button clicks\n- Form submissions\n- Video plays\n- PDF downloads\n- Scroll depth\n- Element visibility",
+    "title": "Criação de Eventos Personalizados no GTM",
+    "question": "Como criar eventos personalizados no Google Tag Manager?",
+    "answer": "1. Crie um Acionador: Vá em Acionadores > Novo e escolha o tipo (Clique, Envio de Formulário, etc.).\n2. Crie a Tag: Vá em Tags > Nova, escolha 'Evento do GA4', selecione sua tag de configuração e defina o nome do evento (ex: clique_botao_whatsapp).\n3. Associe o acionador criado à tag.\n4. Teste no Modo Visualizar (Preview) e, se estiver funcionando, clique em 'Enviar' para publicar as alterações.",
     "category": ["Technical"],
     "tags": ["GTM", "Custom Events", "Tracking", "Google Tag Manager"],
-    "author" : "cferrari"
+    "author": "cferrari"
   },
   {
-    "title": "Fixing 404 Errors in Prestashop",
-    "question": "How do I fix 404 errors in Prestashop?",
-    "answer": "To fix 404 errors in Prestashop:\n\n1. Regenerate .htaccess:\n   - Go to Preferences > SEO & URLs\n   - Enable \"Friendly URL\"\n   - Click \"Save\"\n   - This regenerates the .htaccess file\n\n2. Check URL Rewriting:\n   - Verify mod_rewrite is enabled on your server\n   - Test with: php -m | grep rewrite\n   - If not enabled, contact your hosting provider\n\n3. Clear Cache:\n   - Go to Advanced Parameters > Performance\n   - Clear cache\n   - Test the URLs again\n\n4. Check File Permissions:\n   - .htaccess file should have 644 permissions\n   - Use FTP to verify and update if needed\n\n5. Regenerate URLs:\n   - Go to Preferences > SEO & URLs\n   - For each URL that's giving 404, click \"Regenerate\"\n   - Save changes\n\n6. Common Causes:\n   - Missing .htaccess file\n   - Incorrect rewrite rules\n   - Wrong base URL in configuration\n   - Module conflicts\n\nIf issues persist after these steps, check server error logs for specific error messages.",
+    "title": "Corrigindo Erros 404 no PrestaShop",
+    "question": "Como corrigir erros 404 no PrestaShop?",
+    "answer": "1. Regenerar .htaccess: Vá em Preferências > SEO & URLs, desative e reative a opção 'Friendly URL' e salve.\n2. Verifique o mod_rewrite no servidor.\n3. Limpe o cache em Parâmetros Avançados > Desempenho.\n4. Verifique se as permissões do arquivo .htaccess estão como 644 via FTP.",
     "category": ["Troubleshooting", "Technical"],
     "tags": ["Prestashop", "404 Error", "Troubleshooting", "URL Rewriting"],
-    "author" : "cferrari"
+    "author": "cferrari"
+  },
+  {
+    "title": "Erro de Domínio Ativo no Google Tag Gateway (Cloudflare)",
+    "question": "O que fazer quando o Google Tag Gateway não encontra um domínio ativo para instalação?",
+    "answer": "Se ao instalar o Google Tag Gateway (GTG) ocorrer um erro informando que não foram encontrados domínios ativos:\n\n1. Acesse o painel do Cloudflare do cliente.\n2. Verifique o status do domínio. Ele deve estar como 'Ativo'.\n3. Se estiver 'Pendente', o Google não o encontrará. Isso ocorre porque os NameServers no registro do domínio ainda não apontam para o Cloudflare.\n\nCertifique-se de que o Cloudflare tem o 'controle' total do domínio para que o Google consiga realizar a instalação.",
+    "category": ["Troubleshooting", "Technical"],
+    "tags": ["Google Tag Gateway", "GTG", "Cloudflare", "DNS", "Troubleshooting"],
+    "author": "cferrari"
+  },
+  {
+    "title": "Enhanced Conversions: Solução via JavaScript Personalizado",
+    "question": "Como implementar Enhanced Conversions via JS Personalizado no GTM?",
+    "answer": "Se a implementação padrão falhar, use Variáveis de JavaScript Personalizado para capturar os dados:\n\nPara <b>E-mail</b>:\nfunction email() {\n  var regex = /\\S+@\\S+\\.\\S+/;\n  var email;\n  document.querySelectorAll('SELETOR_AQUI').forEach(function(e) {\n    if(e.value) { email = e.value }\n  });\n  if(!email || !regex.test(email)) return;\n  return email.toLowerCase();\n}\n\nPara Telefone:\nfunction phone() {\n  var g_countryCode = '55';\n  var g_getPhone;\n  document.querySelectorAll('SELETOR_AQUI').forEach(function(e) {\n    if(e.value) { g_getPhone = e.value }\n  });\n  g_getPhone = g_countryCode + g_getPhone;\n  g_getPhone = g_getPhone.replace(/\\D/g, '');\n  if(g_getPhone.length >= 11 && g_getPhone.length <= 15) {\n    return '+' + g_getPhone\n  }\n}\n\nLembre-se de mapear essas variáveis na sua Tag de Conversão do Google Ads.",
+    "category": ["Technical"],
+    "tags": ["GTM", "Enhanced Conversions", "JavaScript", "Google Ads", "Tracking"],
+    "author": "cferrari"
+  },
+  {
+    "title": "Enhanced Conversions: Critérios para Fechamento de Caso",
+    "question": "Quando posso considerar um caso de Enhanced Conversions (EC) como resolvido e fechar o chamado?",
+    "answer": "Se após 7 dias o status não mudar, verifique os seguintes critérios:\n\n### Documentação Necessária (Prints):\n- Configuração da tag 'User-Provided Data' no GTM.\n- Disparo da conversão no GTM.\n- Diagnóstico 'Excelente' no Google Ads.\n- Parâmetro ECSID presente no Tag Assistant (GADS).\n- Parâmetro EM presente no Tag Assistant, com o mesmo valor do ECSID.\n\n### Cenários para Fechamento:\n- <b>Cenário 1:</b> Conversão ativa, go/ec-qual-dash com dados, sem alertas e Coverage Rate > 70%.\n- <b>Cenário 2:</b> Conversão ativa, dashboard com dados, sem alertas, mesmo com Coverage Rate baixo ou zerado.\n- <b>Cenário 3:</b> Conversão ativa e recebendo dados, sem alertas, mesmo que o dashboard esteja sem dados.\n- <b>Cenário 4:</b> Alerta no Google Ads, mas dashboard com dados saudáveis e Coverage Rate > 70%.\n- <b>Cenário 5:</b> Google Ads com 0 conversões e alerta, mas a coluna 'Last Seen' (Visto pela última vez) indica atividade após a implementação.\n\n<span style=\"color:red\">⚠️ Importante 1:</span> Em casos de 'Requer Atenção' sugerindo CwCD, verifique a necessidade do anunciante.\n<span style=\"color:red\">⚠️ Importante 2:</span> Qualquer cenário fora destes deve ser consultado com um SME imediatamente.",
+    "category": ["Technical", "Process"],
+    "tags": ["Enhanced Conversions", "EC", "Google Ads", "Implemented", "Print", "Fechamento"],
+    "author": "cferrari"
   }
 ]

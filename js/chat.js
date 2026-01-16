@@ -30,21 +30,193 @@ const loadKnowledgeBase = async () => {
    ============================================ */
 
 /**
- * Searches knowledge base for matching answer
+ * Normalizes text by removing accents and converting to lowercase
+ * @param {string} text - Text to normalize
+ * @returns {string} Normalized text
+ */
+const normalizeText = (text) => {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+};
+
+/**
+ * Extracts meaningful words from text (removes common stop words)
+ * @param {string} text - Text to process
+ * @returns {Array} Array of meaningful words
+ */
+const extractKeywords = (text) => {
+  const stopWords = [
+    'o', 'a', 'os', 'as', 'um', 'uma', 'de', 'do', 'da', 'dos', 'das',
+    'em', 'no', 'na', 'nos', 'nas', 'para', 'pelo', 'pela', 'por',
+    'com', 'como', 'que', 'se', 'e', 'ou', 'mas', 'eu', 'tu', 'ele',
+    'ela', 'nos', 'vos', 'eles', 'elas', 'este', 'esse', 'aquele',
+    'esta', 'essa', 'aquela', 'meu', 'teu', 'seu', 'nosso', 'vosso',
+    'muito', 'pouco', 'todo', 'algum', 'nenhum', 'outro', 'mesmo',
+    'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to',
+    'for', 'of', 'with', 'by', 'from', 'is', 'are', 'was', 'were'
+  ];
+
+  const normalized = normalizeText(text);
+  const words = normalized.split(/\s+/);
+
+  return words.filter(word =>
+    word.length > 2 && !stopWords.includes(word)
+  );
+};
+
+/**
+ * Calculates similarity score between two sets of words
+ * @param {Array} words1 - First set of words
+ * @param {Array} words2 - Second set of words
+ * @returns {number} Similarity score (0-1)
+ */
+const calculateWordOverlap = (words1, words2) => {
+  if (words1.length === 0 || words2.length === 0) return 0;
+
+  const set1 = new Set(words1);
+  const set2 = new Set(words2);
+
+  let matches = 0;
+  set1.forEach(word => {
+    if (set2.has(word)) {
+      matches++;
+    }
+  });
+
+  return matches / Math.max(set1.size, set2.size);
+};
+
+/**
+ * Calculates string similarity using character-level comparison
+ * @param {string} str1 - First string
+ * @param {string} str2 - Second string
+ * @returns {number} Similarity score (0-1)
+ */
+const calculateStringSimilarity = (str1, str2) => {
+  const s1 = normalizeText(str1);
+  const s2 = normalizeText(str2);
+
+  if (s1 === s2) return 1;
+  if (s1.length === 0 || s2.length === 0) return 0;
+
+  if (s1.includes(s2) || s2.includes(s1)) {
+    return 0.8;
+  }
+
+  const bigrams1 = new Set();
+  const bigrams2 = new Set();
+
+  for (let i = 0; i < s1.length - 1; i++) {
+    bigrams1.add(s1.substring(i, i + 2));
+  }
+
+  for (let i = 0; i < s2.length - 1; i++) {
+    bigrams2.add(s2.substring(i, i + 2));
+  }
+
+  let intersection = 0;
+  bigrams1.forEach(bigram => {
+    if (bigrams2.has(bigram)) {
+      intersection++;
+    }
+  });
+
+  const union = bigrams1.size + bigrams2.size - intersection;
+  return union > 0 ? intersection / union : 0;
+};
+
+/**
+ * Scores an item from knowledge base against user input
+ * @param {Object} item - Knowledge base item
+ * @param {string} userInput - User's question
+ * @returns {number} Relevance score
+ */
+const scoreItem = (item, userInput) => {
+  const userKeywords = extractKeywords(userInput);
+  const questionKeywords = extractKeywords(item.question);
+  const titleKeywords = extractKeywords(item.title);
+  const normalizedInput = normalizeText(userInput);
+
+  let score = 0;
+
+  const questionOverlap = calculateWordOverlap(userKeywords, questionKeywords);
+  score += questionOverlap * 10;
+
+  const titleOverlap = calculateWordOverlap(userKeywords, titleKeywords);
+  score += titleOverlap * 8;
+
+  const questionSimilarity = calculateStringSimilarity(userInput, item.question);
+  score += questionSimilarity * 7;
+
+  const titleSimilarity = calculateStringSimilarity(userInput, item.title);
+  score += titleSimilarity * 5;
+
+  item.tags.forEach(tag => {
+    const tagNormalized = normalizeText(tag);
+    if (normalizedInput.includes(tagNormalized)) {
+      score += 6;
+    }
+
+    const tagKeywords = extractKeywords(tag);
+    const tagOverlap = calculateWordOverlap(userKeywords, tagKeywords);
+    score += tagOverlap * 4;
+  });
+
+  userKeywords.forEach(keyword => {
+    const normalizedQuestion = normalizeText(item.question);
+    const normalizedTitle = normalizeText(item.title);
+
+    if (normalizedQuestion.includes(keyword)) {
+      score += 3;
+    }
+    if (normalizedTitle.includes(keyword)) {
+      score += 2;
+    }
+  });
+
+  return score;
+};
+
+/**
+ * Searches knowledge base for matching answer with improved accuracy
  * @param {string} userInput - User's question or search term
  * @returns {string} Answer from knowledge base or default message
  */
 const findAnswer = (userInput) => {
-  const questionInput = userInput.toLowerCase();
-  const results = searchData.find(item =>
-    item.question.toLowerCase().includes(questionInput) ||
-    item.tags.some(tag => questionInput.includes(tag.toLowerCase()))
-  );
+  if (!userInput || userInput.trim().length < 3) {
+    return "Por favor, faça uma pergunta mais específica.";
+  }
 
-  if (results) {
-    return results.answer;
+  const scoredResults = searchData.map(item => ({
+    item: item,
+    score: scoreItem(item, userInput)
+  }));
+
+  scoredResults.sort((a, b) => b.score - a.score);
+
+  const bestMatch = scoredResults[0];
+  const threshold = 5;
+
+  if (bestMatch && bestMatch.score >= threshold) {
+    console.log(`Match found with score: ${bestMatch.score.toFixed(2)}`);
+    console.log(`Question: ${bestMatch.item.question}`);
+    return bestMatch.item.answer;
   } else {
-    return "Sorry, I could not find the answer to that question. Please try again or ask another.";
+    const topMatches = scoredResults.slice(0, 3).filter(r => r.score > 0);
+
+    if (topMatches.length > 0) {
+      let response = "Não encontrei uma resposta exata, mas talvez uma destas perguntas possa ajudar:\n\n";
+      topMatches.forEach((match, index) => {
+        response += `${index + 1}. ${match.item.question}\n`;
+      });
+      response += "\nPor favor, tente reformular sua pergunta ou escolha uma das opções acima.";
+      return response;
+    }
+
+    return "Desculpe, não encontrei uma resposta para essa pergunta na minha base de conhecimento. Por favor, tente reformular sua pergunta ou entre em contato com um especialista.";
   }
 };
 

@@ -2911,3 +2911,154 @@ form.users-search {
     }
   }
 }
+
+/* Rating System Styles */
+.rating-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rating-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 2px solid #E5E7EB;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    border-color: #3B82F6;
+    color: #3B82F6;
+    background: #EFF6FF;
+
+    svg {
+      stroke: #3B82F6;
+      transform: scale(1.1);
+    }
+  }
+
+  &.thumbs-up:hover {
+    border-color: #10B981;
+    color: #10B981;
+    background: #D1FAE5;
+
+    svg {
+      stroke: #10B981;
+    }
+  }
+
+  &.thumbs-down:hover {
+    border-color: #EF4444;
+    color: #EF4444;
+    background: #FEE2E2;
+
+    svg {
+      stroke: #EF4444;
+    }
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.feedback-box {
+  margin-top: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feedback-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  color: #374151;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #3B82F6;
+  }
+
+  &::placeholder {
+    color: #9CA3AF;
+  }
+}
+
+.submit-feedback-btn,
+.cancel-feedback-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-feedback-btn {
+  background: #3B82F6;
+  color: white;
+
+  &:hover {
+    background: #2563EB;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.cancel-feedback-btn {
+  background: #F3F4F6;
+  color: #6B7280;
+
+  &:hover {
+    background: #E5E7EB;
+    color: #374151;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.rating-success {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #D1FAE5;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease;
+}

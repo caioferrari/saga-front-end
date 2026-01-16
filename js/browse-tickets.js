@@ -376,11 +376,48 @@ const showDetailsInline = (row, index, btn) => {
           <h4 class="details-section-title">Solution Applied</h4>
           ${solutionHTML}
         </div>
+
+        <div style="margin-top: 20px;">
+          <h4 class="details-section-title">Rate this ticket</h4>
+          <div class="details-white-card">
+            <div class="rating-container" data-ticket-id="${ticket.caseID}">
+              <p style="margin-bottom: 16px; color: #6B7280; font-size: 14px;">Was this solution helpful?</p>
+              <div class="rating-buttons">
+                <button class="rating-btn thumbs-up" data-rating="positive" aria-label="Thumbs up">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                  </svg>
+                  <span>Helpful</span>
+                </button>
+                <button class="rating-btn thumbs-down" data-rating="negative" aria-label="Thumbs down">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path>
+                  </svg>
+                  <span>Not Helpful</span>
+                </button>
+              </div>
+              <div class="feedback-box" style="display: none;">
+                <textarea class="feedback-textarea" placeholder="Please tell us what went wrong or how we can improve..." rows="4"></textarea>
+                <div style="display: flex; gap: 8px; margin-top: 12px;">
+                  <button class="submit-feedback-btn">Submit Feedback</button>
+                  <button class="cancel-feedback-btn">Cancel</button>
+                </div>
+              </div>
+              <div class="rating-success" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span style="color: #059669; font-weight: 500;">Thank you for your feedback!</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </td>
   `;
 
   row.parentNode.insertBefore(viewRow, row.nextSibling);
+  attachRatingListeners(viewRow);
 };
 
 // 8. Event Listeners
@@ -393,6 +430,67 @@ const attachEventListeners = () => {
       showDetailsInline(row, index, btn);
     });
   });
+};
+
+// 9. Rating System
+const attachRatingListeners = (viewRow) => {
+  const ratingContainer = viewRow.querySelector('.rating-container');
+  const thumbsUpBtn = viewRow.querySelector('.thumbs-up');
+  const thumbsDownBtn = viewRow.querySelector('.thumbs-down');
+  const feedbackBox = viewRow.querySelector('.feedback-box');
+  const feedbackTextarea = viewRow.querySelector('.feedback-textarea');
+  const submitBtn = viewRow.querySelector('.submit-feedback-btn');
+  const cancelBtn = viewRow.querySelector('.cancel-feedback-btn');
+  const successMsg = viewRow.querySelector('.rating-success');
+  const ratingButtons = viewRow.querySelector('.rating-buttons');
+
+  thumbsUpBtn.addEventListener('click', () => {
+    const ticketId = ratingContainer.getAttribute('data-ticket-id');
+    submitRating(ticketId, 'positive', '');
+    showSuccess();
+  });
+
+  thumbsDownBtn.addEventListener('click', () => {
+    ratingButtons.style.display = 'none';
+    feedbackBox.style.display = 'block';
+    feedbackTextarea.focus();
+  });
+
+  submitBtn.addEventListener('click', () => {
+    const ticketId = ratingContainer.getAttribute('data-ticket-id');
+    const feedback = feedbackTextarea.value.trim();
+
+    if (feedback === '') {
+      alert('Please provide feedback about what went wrong.');
+      return;
+    }
+
+    submitRating(ticketId, 'negative', feedback);
+    showSuccess();
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    feedbackBox.style.display = 'none';
+    ratingButtons.style.display = 'flex';
+    feedbackTextarea.value = '';
+  });
+
+  const showSuccess = () => {
+    ratingButtons.style.display = 'none';
+    feedbackBox.style.display = 'none';
+    successMsg.style.display = 'flex';
+  };
+};
+
+const submitRating = (ticketId, rating, feedback) => {
+  console.log('Rating submitted:', {
+    ticketId,
+    rating,
+    feedback,
+    timestamp: new Date().toISOString()
+  });
+
+  // TODO: Enviar para o Supabase quando necessário
 };
 
 // Inicialização

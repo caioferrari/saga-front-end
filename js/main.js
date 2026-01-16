@@ -275,6 +275,10 @@ const initializeReadMore = () => {
   const readMoreButtons = document.querySelectorAll(".read-more-btn");
 
   readMoreButtons.forEach(btn => {
+    if (btn.hasAttribute("data-initialized")) {
+      return;
+    }
+
     const container = btn.closest(".profile-actions");
     const textContent = container?.querySelector(".text-content");
 
@@ -295,6 +299,8 @@ const initializeReadMore = () => {
         btn.textContent = "Read More";
       }
     });
+
+    btn.setAttribute("data-initialized", "true");
   });
 };
 

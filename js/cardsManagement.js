@@ -1,22 +1,3 @@
-/* READ MORE */
-document.querySelectorAll(".read-more-btn").forEach(btn => {
-  const container = btn.closest(".profile-actions");
-  const textContent = container.querySelector(".text-content");
-  
-  if(textContent.scrollHeight <= textContent.clientHeight) {
-    btn.style.display = "none";
-  }
-  
-  btn.addEventListener("click", () => {
-    container.classList.toggle("expanded");
-    if(container.classList.contains("expanded")) {
-      btn.textContent = "Read Less";
-    }else {
-      btn.textContent = "Read More";
-    }
-  });
-});
-
 /* CLOSING FORM CARD */
 const getFormTemplate = (data) => {
   const configData = window.appConfigData;
@@ -125,10 +106,12 @@ const initExistingTakeCards = () => {
     if(actionsArea && !actionsArea.querySelector(".form-container")) {
       const data = getCardData(card);
       actionsArea.insertAdjacentHTML("beforeend", getFormTemplate(data));
-      
+
       if(typeof customSelect === "function") customSelect();
     }
   });
+
+  if(typeof initializeReadMore === "function") initializeReadMore();
 };
 
 document.addEventListener("click", (e) => {
@@ -157,7 +140,8 @@ document.addEventListener("click", (e) => {
     
     actionsArea.insertAdjacentHTML("beforeend", getFormTemplate(data));
     if(typeof customSelect === "function") customSelect();
-    
+    if(typeof initializeReadMore === "function") initializeReadMore();
+
     const alertContainer = document.querySelector("#alert");
     if(alertContainer) {
       alertContainer.querySelector(".loading")?.remove();
@@ -197,12 +181,14 @@ document.addEventListener("click", (e) => {
       actionsArea.querySelector(".form-container")?.remove();
       
       actionsArea.insertAdjacentHTML("beforeend", `<button class="take" title="Take">Take</button>`);
-      
+
       targetCard.classList.remove("take-card");
       targetCard.removeAttribute("data-status-temp");
       targetCard.dataset.status = "On Queue";
-      
+
       container.insertBefore(targetCard, container.firstChild);
+
+      if(typeof initializeReadMore === "function") initializeReadMore();
     }
     closePrompt();
   }

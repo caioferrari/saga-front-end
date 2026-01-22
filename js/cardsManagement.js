@@ -1,16 +1,62 @@
-/* CLOSING FORM CARD */
+/* --- EMPTY STATE CONSTANTS --- */
+const queueEmptyStateHTML = `
+<div class="empty-state">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+  </svg>
+  <p>Wow! No tickets in the queue!</p>
+</div>`;
+
+const progressEmptyStateHTML = `
+<div class="empty-state">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"></circle>
+    <line x1="12" y1="8" x2="12" y2="12"></line>
+    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+  </svg>
+  <p>No tickets in progress</p>
+</div>`;
+
+/* --- EMPTY STATE LOGIC --- */
+const updateEmptyStates = () => {
+  // Tenta encontrar os containers específicos
+  const queueGrid = document.querySelector('.dashboard-grid.on-queue');
+  const progressGrid = document.querySelector('.dashboard-grid.in-progress');
+
+  const handleGridState = (grid, emptyHTML) => {
+    if (!grid) return;
+
+    // Conta cards que não sejam o próprio aviso de vazio
+    const cards = grid.querySelectorAll('.dashboard-card, .queue-card:not(.empty-state)');
+    const existingEmpty = grid.querySelector('.empty-state');
+
+    if (cards.length === 0) {
+      if (!existingEmpty) {
+        grid.insertAdjacentHTML('beforeend', emptyHTML);
+      }
+    } else {
+      if (existingEmpty) {
+        existingEmpty.remove();
+      }
+    }
+  };
+
+  handleGridState(queueGrid, queueEmptyStateHTML);
+  handleGridState(progressGrid, progressEmptyStateHTML);
+};
+
+/* --- CLOSING FORM CARD --- */
 const getFormTemplate = (data) => {
   const configData = window.appConfigData;
   
   if(!configData) {
-    // return `Loading topics. Please wait...`;
     console.log("Loading topics. Please wait...")
   }
 
-  const teamTasks = configData.team.sme.tasks; 
-  const teamCMS = configData.team.sme.CMS;
-  const problemCats = configData.topics.problemCategory;
-  const statusCats = configData.topics.statusCategory;
+  const teamTasks = configData?.team?.sme?.tasks || []; 
+  const teamCMS = configData?.team?.sme?.CMS || [];
+  const problemCats = configData?.topics?.problemCategory || [];
+  const statusCats = configData?.topics?.statusCategory || [];
   
   return `
     <div class="form-container" style="display: none;">
@@ -110,24 +156,54 @@ const initExistingTakeCards = () => {
       if(typeof customSelect === "function") customSelect();
     }
   });
-
-  if(typeof initializeReadMore === "function") initializeReadMore();
 };
 
 document.addEventListener("click", (e) => {
   const target = e.target;
   
-  // TAKE CARD
+  // --- READ MORE (Delegação de Evento) ---
+  if (target && target.classList.contains("read-more-btn")) {
+    const actionsDiv = target.closest(".profile-actions");
+    const textContent = actionsDiv.querySelector(".text-content");
+
+    if (textContent) {
+      textContent.classList.toggle("expanded");
+
+      if (textContent.classList.contains("expanded")) {
+        target.innerText = "Read Less";
+        textContent.style.display = "block"; 
+        textContent.style.overflow = "visible";
+        textContent.style.webkitLineClamp = "unset";
+      } else {
+        target.innerText = "Read More";
+        textContent.style.display = "-webkit-box";
+        textContent.style.overflow = "hidden";
+        textContent.style.webkitLineClamp = "5";
+        textContent.style.webkitBoxOrient = "vertical";
+      }
+    }
+  }
+
+  // --- TAKE CARD ---
   if(target && target.getAttribute("title") === "Take") {
     const card = target.closest(".queue-card");
-    const container = card.parentNode;
     const actionsArea = card.querySelector(".profile-actions");
     
+    // Busca o grid de destino (In Progress)
+    const destinationContainer = document.querySelector('.dashboard-grid.in-progress');
+    // Fallback caso não encontre (mantém no mesmo pai, mas idealmente deve achar o grid correto)
+    const container = destinationContainer || card.parentNode;
+
     if(typeof loadingBox === "function") loadingBox();
     
     card.classList.add("take-card");
     card.dataset.status = "In Progress";
+    
+    // Move o card para o container correto
     container.appendChild(card);
+    
+    // ATUALIZA OS EMPTY STATES
+    updateEmptyStates();
     
     const data = getCardData(card);
     
@@ -140,7 +216,6 @@ document.addEventListener("click", (e) => {
     
     actionsArea.insertAdjacentHTML("beforeend", getFormTemplate(data));
     if(typeof customSelect === "function") customSelect();
-    if(typeof initializeReadMore === "function") initializeReadMore();
 
     const alertContainer = document.querySelector("#alert");
     if(alertContainer) {
@@ -149,17 +224,19 @@ document.addEventListener("click", (e) => {
     }
   }
   
-  // TOGGLE FORM
+  // --- TOGGLE FORM ---
   if(target && target.classList.contains("toggle-form")) {
     const card = target.closest(".queue-card");
     const formContainer = card.querySelector(".form-container");
-    const isHidden = formContainer.style.display === "none";
     
-    formContainer.style.display = isHidden ? "block" : "none";
-    target.innerText = isHidden ? "Hide Form" : "Close";
+    if(formContainer) {
+        const isHidden = formContainer.style.display === "none";
+        formContainer.style.display = isHidden ? "block" : "none";
+        target.innerText = isHidden ? "Hide Form" : "Close";
+    }
   }
   
-  // Return to queue
+  // --- RETURN TO QUEUE (Prompt) ---
   if(target && target.classList.contains("return-btn")) {
     const cardToReturn = target.closest(".queue-card");
     cardToReturn.setAttribute("data-status-temp", "returning");
@@ -169,12 +246,15 @@ document.addEventListener("click", (e) => {
     }
   }
   
-  //Return confirmed
+  // --- RETURN CONFIRMED ---
   if(target && target.getAttribute("title") === "Yes") {
     const targetCard = document.querySelector('[data-status-temp="returning"]');
     
     if(targetCard) {
-      const container = targetCard.parentNode;
+      // Busca o grid de destino (On Queue)
+      const destinationContainer = document.querySelector('.dashboard-grid.on-queue');
+      const container = destinationContainer || targetCard.parentNode;
+      
       const actionsArea = targetCard.querySelector(".profile-actions");
       
       actionsArea.querySelector(".action-buttons")?.remove();
@@ -186,16 +266,28 @@ document.addEventListener("click", (e) => {
       targetCard.removeAttribute("data-status-temp");
       targetCard.dataset.status = "On Queue";
 
-      container.insertBefore(targetCard, container.firstChild);
-
-      if(typeof initializeReadMore === "function") initializeReadMore();
+      // Move de volta para o topo da fila
+      if (destinationContainer) {
+        destinationContainer.insertBefore(targetCard, destinationContainer.firstChild);
+      } else {
+        container.insertBefore(targetCard, container.firstChild);
+      }
+      
+      // ATUALIZA OS EMPTY STATES
+      updateEmptyStates();
     }
     closePrompt();
   }
   
-  //Return canceled
+  // --- RETURN CANCELED ---
   if(target && target.getAttribute("title") === "Cancel") {
     document.querySelector('[data-status-temp="returning"]')?.removeAttribute("data-status-temp");
     closePrompt();
   }
+});
+
+// Inicialização
+document.addEventListener("DOMContentLoaded", () => {
+    initExistingTakeCards();
+    updateEmptyStates(); // Verifica estado inicial ao carregar
 });
